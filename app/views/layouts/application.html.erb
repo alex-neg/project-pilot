@@ -23,6 +23,9 @@
   </head>
 
   <body class="bg-amber-400">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
