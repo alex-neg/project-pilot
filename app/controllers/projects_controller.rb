@@ -13,7 +13,7 @@ end
 def create
   @project = Project.new(project_params)
   if @project.save
-      redirect_to @project, notice: "Project created!"
+      redirect_to projects_path, notice: "Project created!"
   else
     render :new
   end
