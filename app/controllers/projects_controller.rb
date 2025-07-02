@@ -25,7 +25,7 @@ end
 
 def update
   @project = Project.find(params[:id])
-  if @project.update(project.params)
+  if @project.update(project_params)
     redirect_to @project, notice: "Project updated!"
   else
     render :edit
