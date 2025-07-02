@@ -1,1 +1,27 @@
-<h1>All projects</h1>
+<section>
+    <div>
+        <h1>Projects</h1>
+        <%= link_to "Create Project", new_project_path %>
+    </div>
+
+    <%# Projects list header %>
+        <div>
+            <h2>ID</h2>
+            <h2>Name</h2>
+            <h2>Actions</h2>
+        </div>
+        <%# Projects list rows %>
+        <% @projects.each do |project| %>
+            <div>
+                <p><%= project.id %></p>
+                <p><%= project.name %></p>
+                <div>
+                    <%= link_to "View", project_path(project) %>
+                    <%= link_to "Edit", edit_project_path(project) %>
+                    <%= link_to "Delete", project_path(project), method: :delete, data: {confirm: "Are you sure?"} %>
+                </div>
+                
+            </div>
+        <%end%>
+        <%# I will need the project info (id, name) to look like a row, if multiple projects many rows. On this row to the left will be id and name, thewn to right view, edit, delete %>
+</section>
