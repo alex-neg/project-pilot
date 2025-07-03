@@ -1,5 +1,5 @@
 <section>
-    <div>
+    <div class="bg-amber-400">
         <h1>Projects</h1>
         <%= link_to "Create Project", new_project_path %>
     </div>
@@ -18,7 +18,7 @@
                 <div>
                     <%= link_to "View", project_path(project) %>
                     <%= link_to "Edit", edit_project_path(project) %>
-                    <%= link_to "Delete", project_path(project), method: :delete, data: {confirm: "Are you sure?"} %>
+                    <%= link_to "Delete", project_path(project), data: {confirm: "Are you sure?", turbo_method: :delete} %>
                 </div>
                 
             </div>
