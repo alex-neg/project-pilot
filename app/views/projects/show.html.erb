@@ -1,9 +1,10 @@
 <section>
     <h1>Project Details</h1>
-
+    
     <h3>ID: <%= @project.id %></h3>
     <h3>Name: <%= @project.name %></h3>
 
     <%= link_to "Edit", edit_project_path(@project) %>
+    <%= link_to "Delete", project_path(@project), data: {confirm: "Are you sure?", turbo_method: :delete} %>
     <%= link_to "Back to Projects", projects_path %>
 </section>
