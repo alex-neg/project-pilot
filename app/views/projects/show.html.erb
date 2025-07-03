@@ -1,10 +1,14 @@
 <section>
     <h1>Project Details</h1>
+    <div class="mb-4">
+        <h3>ID: <%= @project.id %></h3>
+        <h3>Name: <%= @project.name %></h3>
+    </div>
     
-    <h3>ID: <%= @project.id %></h3>
-    <h3>Name: <%= @project.name %></h3>
-
-    <%= link_to "Edit", edit_project_path(@project) %>
-    <%= link_to "Delete", project_path(@project), data: {confirm: "Are you sure?", turbo_method: :delete} %>
-    <%= link_to "Back to Projects", projects_path %>
+    <div>
+        <%= link_to "Edit", edit_project_path(@project), class: "px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600" %>
+        <%= link_to "Delete", project_path(@project), data: {confirm: "Are you sure?", turbo_method: :delete} , class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" %>
+        <%= link_to "Back", projects_path, class: "px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600" %>
+    </div>
+    <%= link_to "Sites", project_sites_path(@project) %>
 </section>
