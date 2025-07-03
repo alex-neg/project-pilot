@@ -1,2 +1,15 @@
-<h1>Sites#edit</h1>
-<p>Find me in app/views/sites/edit.html.erb</p>
+<section class="p-6 mx-auto mt-10 max-w-xl bg-white rounded shadow">
+  <h1 class="mb-6 text-2xl font-bold text-gray-800">Edit Site</h1>
+
+  <%= form_with model: [@project, @site], local: true do |form| %>
+    <div class="mb-4">
+      <%= form.label :name, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.text_field :name, class: "w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500" %>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <%= form.submit "Update Site", class: "bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" %>
+      <%= link_to "Back to Sites", project_sites_path(@project), class: "text-gray-600 hover:underline ml-4" %>
+    </div>
+  <% end %>
+</section>

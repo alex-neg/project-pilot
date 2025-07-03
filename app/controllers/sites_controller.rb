@@ -6,19 +6,19 @@ class SitesController < ApplicationController
 
   def show
     @project = Project.find(params[:project_id])
-    @sites = @project.sites.find(params[:id])
+    @site = @project.sites.find(params[:id])
   end
 
   def new
     @project = Project.find(params[:project_id])
-    @sites = @project.sites.new
+    @site = @project.sites.new
   end
 
   def create
     @project = Project.find(params[:project_id])
-    @sites = @project.sites.new(site_params)
+    @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to project_site_path(@project, @site), notice: "Site created!"
+      redirect_to project_sites_path(@project), notice: "Site created!"
     else
       render :new
     end
@@ -26,17 +26,17 @@ class SitesController < ApplicationController
 
   def edit
     @project = Project.find(params[:project_id])
-    @sites = @project.site.find(params[:id])
+    @site = @project.sites.find(params[:id])
   end
 
   def update
-     @project = Project.find(params[:project_id])
-     @site = @project.sites.find(params[:id])
-     if @site.update(site_params)
-      redirect_to project_site_path(@project, @site), notice: "Site updated!"
-     else
+    @project = Project.find(params[:project_id])
+    @site = @project.sites.find(params[:id])
+    if @site.update(site_params)
+      redirect_to project_sites_path(@project), notice: "Site updated!"
+    else
       render :edit
-     end
+    end
   end
 
   def destroy
