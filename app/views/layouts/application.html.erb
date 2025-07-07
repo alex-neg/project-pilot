@@ -10,19 +10,15 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    
     <%= stylesheet_link_tag "application.css", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="">
+  <body class="bg-slate-50">
     <header class="bg-white shadow">
     <div class="px-4 py-4 mx-auto max-w-7xl">
       <h1 class="text-xl font-bold text-gray-800">Project Pilot</h1>
@@ -36,9 +32,6 @@
   <main class="px-4 py-6">
     <%= yield %>
   </main>
-
-  <footer class="py-4 text-xs text-center text-gray-500">
-    &copy; <%= Time.now.year %> Project Pilot
-  </footer>
+    
   </body>
 </html>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "projects#index"
+  root "projects#test"
   resources :projects do
     resources :sites
     resources :samples
