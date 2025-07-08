@@ -1,0 +1,22 @@
+<h1 class="text-3xl font-semibold text-gray-900 mb-8"><%= table[:header] %></h1>
+
+<div class="overflow-x-auto">
+ <table class="w-full">
+   <thead>
+     <tr class="border-b-2 border-gray-200">
+       <% table[:columns].each do |column| %>
+         <th class="text-left py-4 px-2 font-semibold text-gray-800 uppercase tracking-wide text-sm"><%= column[:label] %></th>
+       <% end %>
+     </tr>
+   </thead>
+   <tbody class="divide-y divide-gray-100">
+     <% table[:items].each do |item| %>
+       <tr class="hover:bg-gray-50 transition-colors">
+         <% table[:columns].each do |column| %>
+           <td class="py-4 px-2 text-gray-700"><%= item.send(column[:accessor]) %></td>
+         <% end %>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
+</div>
