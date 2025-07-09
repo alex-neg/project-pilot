@@ -1,29 +1,34 @@
-<%= render Templates::ListTemplateComponent.new(
-      table: {
-        header: "Projects",
-        items: @projects,
-        columns: [
-          {
-            label: 'ID',
-            accessor: :id
-          },
-          {
-            label: 'Name',
-            accessor: :name
-          }
-        ],
-        actions: [
-          {
-            label: "View",
-            path_proc: proc { |project| project_path(project) }
-          }
-        ]
-      },           
-)%>
-
-<%= render Templates::ListTemplateComponent.new(
-      section: {
-        header: "Projects",
-        
-      }    
+<%=render Templates::ListTemplateComponent.new( 
+  header: "Projects", 
+  items: @projects,
+  columns: [ 
+    {
+      label: "ID", 
+      accessor: :id, 
+      width: "w-1/6"
+    }, 
+    {
+      label: "Name", 
+      accessor: :name,
+      width: "w-4/6"
+    }, 
+  ], 
+  actions: [
+    {
+      label: "View", 
+      path_proc: ->(project) {project_path(project)}
+    }, 
+    {
+      label: "Edit", 
+      path_proc: ->(project) {edit_project_path(project)}
+    }, 
+    {
+      label: "Delete", 
+      path_proc: ->(project) {project_path(project)},
+      html_options: {
+                      data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, 
+                      class: "text-red-600"
+                    }
+    }
+  ]
 )%>
