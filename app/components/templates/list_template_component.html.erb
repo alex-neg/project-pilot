@@ -1,30 +1,32 @@
-<section>
+<section class="p-4">
     <div class="flex flex-wrap justify-between items-center px-6 py-4 mb-6">
         <h2 class="text-xl font-semibold text-gray-800"> <%= @header %> </h2>
         <div class="px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/8 hover:bg-indigo-500">
             <%= link_to "Create Project", new_project_path %>
         </div>
     </div>
-    <%# Header %>
-    <div class="flex px-6 py-2 font-bold text-gray-800 bg-amber-50 rounded-xl border-2 border-slate-200">      
-        <% @columns.each do |col| %>
-            <div class="border <%= col[:width] %>"> <%= col[:label] %> </div>
-        <% end %>
-        <div class="w-1/6 border">Actions</div>
-    </div>
-    <%# Rows %>
-    <% @items.each do |item| %>
-        <div class="flex justify-between px-6 py-2 text-gray-800 border-b border-slate-200">
+    <div class="rounded-xl border border-slate-300">  
+        <%# Header %>
+        <div class="flex px-6 py-4 font-bold text-gray-800 rounded-t-xl border-slate-200">      
             <% @columns.each do |col| %>
-                <div class="px-4 py-2 <%= col[:width] %>">
-                     <%= item.send(col[:accessor]) %>
-                </div>
-            <%end%>
-            <div class="px-4 py-2 space-x-2 w-1/6">
-                <% @actions.each do |action| %>
-                    <%= link_to action[:label], action[:path_proc].call(item), action[:html_options] || {} %>
-                <%end%>
-            </div>
+                <div class="pl-4  <%= col[:width] %>"> <%= col[:label] %> </div>
+            <% end %>
+            <div class="pl-8 w-1/6">Actions</div>
         </div>
-    <%end%>
+        <%# Rows %>
+        <% @items.each do |item| %>
+            <div class="flex justify-between px-6 py-1 text-gray-800 border-t border-slate-200">
+                <% @columns.each do |col| %>
+                    <div class="px-4 py-2 <%= col[:width] %>">
+                        <%= item.send(col[:accessor]) %>
+                    </div>
+                <%end%>
+                <div class="px-4 py-2 space-x-2 w-1/6">
+                    <% @actions.each do |action| %>
+                        <%= link_to action[:label], action[:path_proc].call(item), action[:html_options] || {} %>
+                    <%end%>
+                </div>
+            </div>
+        <%end%>
+    </div>
  </section>
