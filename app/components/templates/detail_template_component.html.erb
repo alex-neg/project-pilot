@@ -1,0 +1,27 @@
+<section class="p-6 mx-auto space-y-4 max-w-5xl">
+    <%# Project card %>
+    <div class="space-y-4">
+        <div class="flex flex-col justify-between items-start px-6 py-4 bg-white rounded-lg border shadow border-slate-200 md:flex-row md:items-center">
+            <%# Left %>
+            <div class="flex flex-col space-y-1">
+                <h2 class="text-lg font-semibold text-gray-800"> <%= project_details[:name] %> </h2>
+                <p class="text-sm text-gray-500">ID: <%= project[:id] %> </p>
+                <% links.each do |link| %>
+                    <a href="<%= link[:path_proc].call(project) %>" class="text-sm text-indigo-600 hover:underline">
+                        <%= link[:label] %>
+                    </a>
+                <% end %>
+
+            </div>
+            <%# Right %>
+            <div class="flex mt-4 space-x-2 md:mt-0">
+                <% actions.each do |action| %>
+                    <%= link_to action[:label],
+                                action[:path_proc].call(project),
+                                action[:html_options] || {} %>
+                <% end %>
+            </div>
+
+        </div>
+    </div>
+</section>
