@@ -1,0 +1,18 @@
+<section class="p-6 mx-auto space-y-4 max-w-5xl">
+  <div>
+    <h2 class="text-lg font-semibold text-gray-800">New Project</h2>
+    <% @actions.each do |action| %>
+        <%= link_to action[:label], action[:path_proc].call(@project), class: "text-indigo-600 hover:underline mb-4 block" %>
+    <%end%>
+
+    <%= form_with model: @project, local: true do |form| %>
+        <div class="mb-4">
+            <%= form.label :name, "Project Name", class: "block text-gray-700 font-semibold mb-2" %>
+            <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+        </div>
+        <div>
+            <%= form.submit "Create Project", class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
+        </div>
+    <%end%>
+  </div>
+</section>
