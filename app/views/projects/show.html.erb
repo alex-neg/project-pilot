@@ -1,6 +1,6 @@
 <%=render Templates::DetailTemplateComponent.new(
-    project: @project,
-    project_details: {
+    model: @project,
+    model_details: {
         name: @project.name,
         id: @project.id
     },
@@ -20,7 +20,7 @@
     links: [
         {
             label: "View Sites", 
-            path_proc: ->(project) {project_sites_path(project)}
+            path_proc: ->(project) {project_sites_path(project)},
         }, 
         {
             label: "View Samples", 

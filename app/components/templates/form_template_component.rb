@@ -8,5 +8,5 @@ class Templates::FormTemplateComponent < ApplicationComponent
     @parent = parent
   end
 
-  attr_reader :model, :title, :actions, :fields, :show_picture
+  attr_reader :model, :title, :actions, :fields, :show_picture, :parent
 end

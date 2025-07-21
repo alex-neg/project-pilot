@@ -1,16 +1,30 @@
-<section class="p-6 mx-auto mt-10 max-w-xl bg-white rounded shadow">
-  <h1 class="mb-6 text-2xl font-bold text-gray-800">Site Details</h1>
-
-  <div class="mb-6 space-y-2 text-gray-700">
-    <p><span class="font-semibold">ID:</span> <%= @site.id %></p>
-    <p><span class="font-semibold">Name:</span> <%= @site.name %></p>
-  </div>
-
-  <div class="flex flex-wrap gap-4 mb-6">
-    <%= link_to "Edit", edit_project_site_path(@project, @site), class: "px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600" %>
-    <%= link_to "Delete", project_site_path(@project, @site), data: { confirm: "Are you sure?", turbo_method: :delete }, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" %>
-    <%= link_to "Back to Sites", project_sites_path(@project), class: "px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600" %>
-  </div>
-
-  <%= link_to "Back to Project", project_path(@project), class: "inline-block text-emerald-600 hover:underline font-semibold" %>
-</section>
+<%=render Templates::DetailTemplateComponent.new(
+    model: @site,
+    model_details: {
+        name: @site.name,
+        id: @site.id
+    },
+    actions: [
+        Library::ButtonComponent.new(
+                label: "Edit", 
+                path: edit_project_site_path(@project, @site),
+                variant: :secondary
+        ),
+        Library::ButtonComponent.new(
+                label: "Delete", 
+                path: project_sites_path(@project, @site),
+                variant: :danger, 
+                data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+        ),
+    ], 
+    links: [
+        {
+            label: "View Sites", 
+            path_proc: ->(project) {project_sites_path(project)}
+        }, 
+        {
+            label: "View Samples", 
+            path_proc: ->(project) {project_samples_path(project)}
+        }
+    ]
+)%>
