@@ -3,23 +3,19 @@
     project_details: {
         name: @project.name,
         id: @project.id
-    }, 
+    },
     actions: [
-        {
-            label: "Edit", 
-            path_proc: ->(project) {edit_project_path(project)}, 
-            html_options: {
-                class: "flex justify-center items-center px-5 py-2 w-24 h-10 text-sm text-white bg-indigo-400 rounded hover:bg-indigo-500"
-            }
-        }, 
-        {
-            label: "Delete",
-            path_proc: ->(project) {project_path(project)},
-            html_options: {
-                data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, 
-                class: "flex justify-center items-center px-5 py-2 w-24 h-10 text-sm text-white bg-red-400 rounded hover:bg-red-500"
-            }
-        }
+        Library::ButtonComponent.new(
+                label: "Edit", 
+                path: edit_project_path(@project),
+                variant: :secondary
+        ),
+        Library::ButtonComponent.new(
+                label: "Delete", 
+                path: project_path(@project),
+                variant: :danger, 
+                data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+        ),
     ], 
     links: [
         {

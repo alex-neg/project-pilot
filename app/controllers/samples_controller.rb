@@ -50,6 +50,6 @@ class SamplesController < ApplicationController
   private
 
   def sample_params
-    params.require(:sample).permit(:name, :description, :sample_type)
+    params.require(:sample).permit(:name, :description, :sample_type, :photo)
   end
 end

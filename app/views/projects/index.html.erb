@@ -1,5 +1,10 @@
 <%=render Templates::ListTemplateComponent.new( 
-  header: "Projects", 
+  title: "Projects",
+  action_button: Library::ButtonComponent.new(
+        label: "Create Project", 
+        path: new_project_path,
+        variant: :primary
+      ),
   items: @projects,
   columns: [ 
     {
@@ -18,19 +23,18 @@
   actions: [
     {
       label: "View", 
-      path_proc: ->(project) {project_path(project)}
+      path_proc: ->(project) {project_path(project)},
+    
     }, 
     {
       label: "Edit", 
-      path_proc: ->(project) {edit_project_path(project)}
+      path_proc: ->(project) {edit_project_path(project)},
     }, 
     {
       label: "Delete", 
       path_proc: ->(project) {project_path(project)},
-      html_options: {
-                      data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, 
-                      class: "text-red-600"
-                    }
+      variant: :link_danger,
+      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
   ]
 )%>

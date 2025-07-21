@@ -1,18 +1,40 @@
 <section class="p-6 mx-auto space-y-4 max-w-5xl">
   <div>
-    <h2 class="text-lg font-semibold text-gray-800">New Project</h2>
-    <% @actions.each do |action| %>
-        <%= link_to action[:label], action[:path_proc].call(@project), class: "text-indigo-600 hover:underline mb-4 block" %>
-    <%end%>
+    <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
 
-    <%= form_with model: @project, local: true do |form| %>
-        <div class="mb-4">
-            <%= form.label :name, "Project Name", class: "block text-gray-700 font-semibold mb-2" %>
-            <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
-        </div>
-        <div>
-            <%= form.submit "Create Project", class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
-        </div>
-    <%end%>
+    <% actions.each do |action| %>
+      <%= link_to action[:label], action[:path_proc].call(model), class: "text-indigo-600 hover:underline mb-4 block" %>
+    <% end %>
+
+    <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
+
+      <% if fields.include?(:name) %>
+        <%= field.input :name, label: "Name", required: true,
+                    input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" },
+                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+      <% end %>
+
+      <% if fields.include?(:description) %>
+        <%= field.input :description, as: :text, label: "Description",
+                    input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
+                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+      <% end %>
+
+      <% if fields.include?(:type) %>
+        <%= field.input :type, collection: model.class.types.keys, prompt: "Select type",
+                    input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
+                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+      <% end %>
+
+      <% if show_picture %>
+        <%= field.input :photo, as: :file,
+                    input_html: { class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" },
+                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+      <% end %>
+
+      <%= field.button :submit, "Save",
+                   class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
+
+    <% end %>
   </div>
 </section>

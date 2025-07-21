@@ -1,5 +1,10 @@
 <%= render Templates::ListTemplateComponent.new(
-    header: "Sites", 
+    title: "Sites", 
+    action_button: Library::ButtonComponent.new(
+        label: "Create Site", 
+        path: new_project_site_path(@project, @site),
+        variant: :primary
+      ),
     items: @sites,
     columns: [ 
     {
@@ -11,9 +16,13 @@
       accessor: :name,
     },
     {
+      label: "Project ID", 
+      accessor: :project_id
+    },
+    {
       label: "Actions", 
       custom_render: true
-    }
+    },
   ],
   actions: [
     {
@@ -27,10 +36,8 @@
     {
       label: "Delete", 
       path_proc: ->(project, site) {project_site_path(project, site)},
-      html_options: {
-                      data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, 
-                      class: "text-red-600"
-                    }
+      variant: :link_danger,
+      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
   ]
 )%>

@@ -65,3 +65,7 @@ group :test do
 end
 
 gem "view_component"
+
+gem "simple_form"
+
+gem "pagy"

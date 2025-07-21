@@ -1,9 +1,11 @@
 <%= render Templates::FormTemplateComponent.new(
-  project: @project, 
+  model: @project,
+  title: "New Project",
   actions: [
     {
       label: "Back", 
       path_proc: ->(_) {projects_path}
     }
-  ]
+  ], 
+  fields: [:name]
 ) %>

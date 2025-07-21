@@ -1,8 +1,8 @@
 <section class="p-4">
   <div class="flex flex-wrap justify-between items-center px-6 py-4 mb-6">
-    <h2 class="text-xl font-semibold text-gray-800"> <%= @header %> </h2>
-    <div class="px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/8 hover:bg-indigo-500">
-      <%= link_to "Create Project", new_project_path %>
+    <h2 class="text-xl font-semibold text-gray-800"> <%= @title %> </h2>
+    <div>
+      <%= render @action_button if @action_button.present? %>
     </div>
   </div>
 
@@ -36,10 +36,33 @@
               "flex-1"
             end
           %>
-          <div class="px-4 py-2 <%= width_class %>">
+          <div class="px-4 py-2 flex <%= width_class %>">
             <% if col[:custom_render] %>
               <% @actions.each do |action| %>
-                <%= link_to action[:label], action[:path_proc].call(item), action[:html_options] || {} %>
+                <div class="flex">
+                  <% 
+                    path_proc = action[:path_proc]
+                    path = if path_proc.arity == 2
+                      path_proc.call(item.project, item)
+                    else
+                      path_proc.call(item)
+                    end
+                  %>
+                  <%= render Library::ButtonComponent.new(
+                    label: action[:label], 
+                    path: path,
+                    variant: action[:variant], 
+                    method: action[:turbo_method] || {},
+                    data: action[:data] || {},
+                  ) %>
+                </div>
+              <% end %>
+              <%# Render pic %>
+            <% elsif col[:show_picture] %>
+              <% if item.photo.attached? %>
+                <%= image_tag item.photo.variant(resize_to_limit: [150, 150]), class: "rounded-md object-cover w-32 h-32 block" %>
+              <% else %>
+                <span class="text-sm italic text-gray-400">No image</span>
               <% end %>
             <% else %>
               <%= item.send(col[:accessor]) %>
