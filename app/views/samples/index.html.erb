@@ -1,4 +1,5 @@
 <%= render Templates::ListTemplateComponent.new(
+    breadcrumb: "Projects/#{@project.name}/Samples",
     title: "Samples", 
     action_button: Library::ButtonComponent.new(
         label: "Create Sample", 
