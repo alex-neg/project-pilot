@@ -20,11 +20,11 @@
     links: [
         {
             label: "View Sites", 
-            path_proc: ->(project) {project_sites_path(project)},
+            path_proc: ->(project) {project_sites_path(@project)},
         }, 
         {
             label: "View Samples", 
-            path_proc: ->(project) {project_samples_path(project)}
+            path_proc: ->(project) {project_samples_path(@project)}
         }
     ]
 )%>

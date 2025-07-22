@@ -1,32 +1,20 @@
-<section class="p-4">
-  <%= tag.p @breadcrumb %>
-  <div class="flex flex-wrap justify-between items-center px-6 py-4 mb-6">
-    <h2 class="text-xl font-semibold text-gray-800"> <%= @title %> </h2>
-    <div>
-      <%= render @action_button if @action_button.present? %>
-    </div>
+<section class="p-6">
+  <div class="flex flex-wrap justify-between items-center px-6 py-5 mb-8">
+    <h2 class="text-2xl font-bold text-gray-900"> <%= @header %> </h2>
+    <%= render @action_button if @action_button.present? %>
   </div>
 
-  <div class="rounded-xl border border-slate-300">
+  <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
     <%# Header %>
-    <div class="flex px-6 py-4 font-bold text-gray-800 rounded-t-xl border-slate-200">
+    <div class="flex px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-b border-gray-200">
       <% @columns.each_with_index do |col, index| %>
-        <% width_class =
-          if col[:custom_render]
-            "w-1/6"
-          elsif index == 0
-            "w-1/6"
-          else
-            "flex-1"
-          end
-        %>
-        <div class="pl-4 <%= width_class %>"> <%= col[:label] %> </div>
+        <div class="pl-4 flex-1 uppercase text-xs tracking-wide"> <%= col[:label] %> </div>
       <% end %>
     </div>
 
     <%# Rows %>
-    <% @items.each do |item| %>
-      <div class="flex justify-between px-6 py-1 text-gray-800 border-t border-slate-200">
+    <% @items.each_with_index do |item, row_index| %>
+      <div class="flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
         <% @columns.each_with_index do |col, index| %>
           <% width_class =
             if col[:custom_render]
@@ -66,7 +54,9 @@
                 <span class="text-sm italic text-gray-400">No image</span>
               <% end %>
             <% else %>
-              <%= item.send(col[:accessor]) %>
+              <span class="text-sm font-medium text-gray-900">
+                <%= item.send(col[:accessor]) %>
+              </span>
             <% end %>
           </div>
         <% end %>
