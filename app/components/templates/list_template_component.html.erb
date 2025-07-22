@@ -16,16 +16,7 @@
     <% @items.each_with_index do |item, row_index| %>
       <div class="flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
         <% @columns.each_with_index do |col, index| %>
-          <% width_class =
-            if col[:custom_render]
-              "w-1/6"
-            elsif index == 0
-              "w-1/6"
-            else
-              "flex-1"
-            end
-          %>
-          <div class="px-4 py-2 flex <%= width_class %>">
+          <div class="px-4 py-2 flex flex-1">
             <% if col[:custom_render] %>
               <% @actions.each do |action| %>
                 <div class="flex">
