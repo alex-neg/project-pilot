@@ -1,5 +1,7 @@
-<%=render Templates::ListTemplateComponent.new( 
-  breadcrumb: "Projects/",
+<%=render Templates::ListTemplateComponent.new(
+  breadcrumb: [
+      {label: "Projects", path: projects_path}
+    ],
   title: "Projects",
   action_button: Library::ButtonComponent.new(
         label: "Create Project", 

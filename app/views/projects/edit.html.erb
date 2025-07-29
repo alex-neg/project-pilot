@@ -1,4 +1,9 @@
 <%=render Templates::FormTemplateComponent.new(
+  breadcrumb: [
+      {label: "Projects", path: projects_path},
+      { label: @project.name, path: project_path(@project)},
+      {label: "Edit"}
+    ],
   model: @project,
   title: "Edit Project", 
   actions: [

@@ -1,4 +1,7 @@
 <section class="p-6 mx-auto space-y-4 max-w-5xl">
+    <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
+        <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+    </div>
     <div>
     <%= link_to "← Back to Projects", projects_path, class: "text-sm text-indigo-600 hover:underline" %>
   </div>
@@ -16,6 +19,12 @@
                 <% end %>
 
             </div>
+            <%# Render pic %>
+            <% if  model.is_a?(Sample) && model.photo.attached? %>
+                <div class="mt-4 md:mt-0">
+                    <%= image_tag model.photo.variant(resize_to_limit: [300, 300]), class: "rounded-md object-cover w-48 h-48 border border-gray-300" %>
+                </div>
+            <% end %>
             <%# Right %>
             <div class="flex mt-4 space-x-2 md:mt-0">
                 <% actions.each do |action_button| %>

@@ -1,5 +1,11 @@
 
 <%=render Templates::DetailTemplateComponent.new(
+    breadcrumb: [
+      {label: "Projects", path: projects_path},
+      { label: @project.name, path: project_path(@project)},
+      {label: "Samples", path: project_samples_path(@project)},
+      {label: "Show"}   
+    ],
     parent: @project,
     model: @sample,
     model_details: {
@@ -28,5 +34,6 @@
             label: "View Samples", 
             path_proc: ->(project) {project_samples_path(project)}
         }
-    ]
+    ], 
+    show_picture: true, 
 )%>

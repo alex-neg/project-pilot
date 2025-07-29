@@ -1,4 +1,9 @@
 <%=render Templates::DetailTemplateComponent.new(
+     breadcrumb: [
+      {label: "Projects", path: projects_path},
+      { label: @project.name, path: project_path(@project)},
+      {label: "Show"}
+    ],
     model: @project,
     model_details: {
         name: @project.name,

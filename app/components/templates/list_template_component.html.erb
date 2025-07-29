@@ -1,14 +1,13 @@
 <section class="p-6">
-  <div class="flex flex-wrap justify-between items-center px-6 py-5 mb-8">
-    <h2 class="text-2xl font-bold text-gray-900"> <%= @header %> </h2>
+  <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
+    <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
     <%= render @action_button if @action_button.present? %>
   </div>
-
-  <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
+  <div class="overflow-hidden bg-white rounded-xl border border-gray-200 shadow-sm">
     <%# Header %>
     <div class="flex px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-b border-gray-200">
       <% @columns.each_with_index do |col, index| %>
-        <div class="pl-4 flex-1 uppercase text-xs tracking-wide"> <%= col[:label] %> </div>
+        <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= col[:label] %> </div>
       <% end %>
     </div>
 
@@ -16,7 +15,7 @@
     <% @items.each_with_index do |item, row_index| %>
       <div class="flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
         <% @columns.each_with_index do |col, index| %>
-          <div class="px-4 py-2 flex flex-1">
+          <div class="flex flex-1 px-4 py-2">
             <% if col[:custom_render] %>
               <% @actions.each do |action| %>
                 <div class="flex">

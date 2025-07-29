@@ -1,40 +1,37 @@
-<section class="p-6 space-y-6 max-w-2xl">
-  <div>
-    <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
+<section class="flex flex-col items-center p-6 min-h-screen">
+    <div class="flex justify-between items-center mb-6 w-full max-w-7xl">
+        <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
+        <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+    </div>
 
-    <% actions.each do |action| %>
-      <%= link_to action[:label], action[:path_proc].call(model), class: "text-indigo-600 hover:underline mb-4 block" %>
-    <% end %>
+    <div class="p-6 w-full max-w-3xl bg-white rounded-xl border border-gray-200 shadow-sm">
+        <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
 
-    <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
-
-      <% if fields.include?(:name) %>
-        <%= field.input :name, label: "Name", required: true,
+            <% if fields.include?(:name) %>
+                <%= field.input :name, label: "Name", required: true,
                     input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" },
                     label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-      <% end %>
+            <% end %>
 
-      <% if fields.include?(:description) %>
-        <%= field.input :description, as: :text, label: "Description",
+            <% if fields.include?(:description) %>
+                <%= field.input :description, as: :text, label: "Description",
                     input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
                     label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-      <% end %>
+            <% end %>
 
-      <% if fields.include?(:sample_type) %>
-        <%= field.input :sample_type, collection: model.class.sample_types.keys, prompt: "Select type",
+            <% if fields.include?(:sample_type) %>
+                <%= field.input :sample_type, collection: model.class.sample_types.keys, prompt: "Select type",
                     input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
                     label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-      <% end %>
+            <% end %>
 
-      <% if show_picture %>
-        <%= field.input :photo, as: :file,
+            <% if show_picture %>
+                <%= field.input :photo, as: :file,
                     input_html: { class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" },
                     label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+            <% end %>
+
+            <%= field.button :submit, "Save", class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
       <% end %>
-
-      <%= field.button :submit, "Save",
-                   class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
-
-    <% end %>
-  </div>
+    </div>
 </section>

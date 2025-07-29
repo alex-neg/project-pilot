@@ -18,15 +18,15 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="bg-slate-50 h-screen overflow-hidden">
+  <body class="overflow-hidden h-screen bg-slate-50">
     <div class="flex h-full">
       <!-- Sidebar -->
-      <aside class="w-64 bg-white/80 backdrop-blur-md border-r border-slate-200/50 flex flex-col">
+      <aside class="flex flex-col w-64 border-r backdrop-blur-md bg-white/80 border-slate-200/50">
         <!-- Logo -->
         <div class="p-6 border-b border-slate-200/50">
           <div class="flex items-center space-x-3">
             <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg"></div>
-            <h1 class="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
+            <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">
               Project Pilot
             </h1>
           </div>
@@ -44,9 +44,9 @@
 
         <!-- User Profile -->
         <div class="p-4 border-t border-slate-200/50">
-          <div class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-slate-100/70 transition-all cursor-pointer">
-            <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <span class="text-white text-sm font-semibold">JP</span>
+          <div class="flex items-center px-4 py-3 space-x-3 rounded-xl transition-all cursor-pointer hover:bg-slate-100/70">
+            <div class="flex justify-center items-center w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+              <span class="text-sm font-semibold text-white">JP</span>
             </div>
             <div class="flex-1">
               <p class="text-sm font-medium text-slate-700">John Pilot</p>
@@ -57,23 +57,23 @@
       </aside>
 
       <!-- Main Content Area -->
-      <div class="flex-1 flex flex-col overflow-hidden">
+      <div class="flex overflow-hidden flex-col flex-1">
 
         <!-- Flash Messages -->
         <% if notice %>
-          <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-4 mx-6 mt-4 backdrop-blur-sm">
-            <p class="text-emerald-800 font-medium"><%= notice %></p>
+          <div class="p-4 mx-6 mt-4 rounded-xl border border-emerald-200 backdrop-blur-sm bg-emerald-50/50">
+            <p class="font-medium text-emerald-800"><%= notice %></p>
           </div>
         <% end %>
 
         <% if alert %>
-          <div class="bg-red-50/50 border border-red-200 rounded-xl p-4 mx-6 mt-4 backdrop-blur-sm">
-            <p class="text-red-800 font-medium"><%= alert %></p>
+          <div class="p-4 mx-6 mt-4 rounded-xl border border-red-200 backdrop-blur-sm bg-red-50/50">
+            <p class="font-medium text-red-800"><%= alert %></p>
           </div>
         <% end %>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-auto p-6">
+        <main class="overflow-auto flex-1 p-6">
           <%= yield %>
         </main>
       </div>
