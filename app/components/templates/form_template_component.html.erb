@@ -26,6 +26,12 @@
             <% end %>
 
             <% if show_picture %>
+                <% if @model.photo.attached? %>
+                  <div>
+                    <p>Current image</p>
+                    <%= image_tag @model.photo, class: "rounded-md border w-32 h-32 object-cover" %>
+                  </div>
+                <% end %>
                 <%= field.input :photo, as: :file,
                     input_html: { class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" },
                     label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
