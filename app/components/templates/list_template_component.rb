@@ -5,6 +5,7 @@ class Templates::ListTemplateComponent < ApplicationComponent
     @columns = columns
     @items = items
     @actions = actions
+    # @pagy = pagy
     @action_button = action_button
   end
 end

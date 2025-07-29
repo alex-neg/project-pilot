@@ -13,9 +13,9 @@
 
     <%# Rows %>
     <% @items.each_with_index do |item, row_index| %>
-      <div class="flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
+      <div class=" flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
         <% @columns.each_with_index do |col, index| %>
-          <div class="flex flex-1 px-4 py-2">
+          <div class="flex flex-1 items-center px-4 py-2">
             <% if col[:custom_render] %>
               <% @actions.each do |action| %>
                 <div class="flex">
@@ -39,7 +39,7 @@
               <%# Render pic %>
             <% elsif col[:show_picture] %>
               <% if item.photo.attached? %>
-                <%= image_tag item.photo, class: "rounded-md object-cover w-24 h-24 block" %>
+                <%= image_tag item.photo, class: "rounded-md object-cover w-20 h-20 block" %>
               <% else %>
                 <span class="text-sm italic text-gray-400">No image</span>
               <% end %>
@@ -52,5 +52,7 @@
         <% end %>
       </div>
     <% end %>
+    <%# Pagy %>
   </div>
 </section>
+

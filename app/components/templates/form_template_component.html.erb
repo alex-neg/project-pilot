@@ -4,7 +4,7 @@
         <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
     </div>
 
-    <div class="p-6 w-full max-w-3xl bg-white rounded-xl border border-gray-200 shadow-sm">
+    <div class="p-6 w-full max-w-5xl bg-white rounded-xl border border-gray-200 shadow-sm">
         <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
 
             <% if fields.include?(:name) %>

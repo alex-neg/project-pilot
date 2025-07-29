@@ -4,13 +4,15 @@
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},
-      {label: "Show"}   
+      {label: @sample.name, path: project_samples_path(@project)}
     ],
     parent: @project,
     model: @sample,
     model_details: {
         name: @sample.name,
-        id: @sample.id
+        id: @sample.id,
+        description: @sample.description,
+        sample_type: @sample.sample_type
     },
     actions: [
         Library::ButtonComponent.new(

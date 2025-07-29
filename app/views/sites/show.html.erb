@@ -4,6 +4,12 @@
         name: @site.name,
         id: @site.id
     },
+    breadcrumb: [
+      {label: "Projects", path: projects_path},
+      { label: @project.name, path: project_path(@project)},
+      {label: "Sites", path: project_sites_path(@project)},
+      { label: @site.name, path: project_sites_path(@project)},
+    ],
     actions: [
         Library::ButtonComponent.new(
                 label: "Edit", 
@@ -17,14 +23,14 @@
                 data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
         ),
     ], 
-    links: [
-        {
-            label: "View Sites", 
-            path_proc: ->(project) {project_sites_path(project)}
-        }, 
-        {
-            label: "View Samples", 
-            path_proc: ->(project) {project_samples_path(project)}
-        }
-    ]
+    # links: [
+    #     {
+    #         label: "View Sites", 
+    #         path_proc: ->(project) {project_sites_path(project)}
+    #     }, 
+    #     {
+    #         label: "View Samples", 
+    #         path_proc: ->(project) {project_samples_path(project)}
+    #     }
+    # ]
 )%>
