@@ -1,58 +1,67 @@
-<section class="p-6">
+<section class="p-6 bg-red-50">
   <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
+    <h2 class="text-lg font-semibold text-gray-800"><%= @title %></h2>
     <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
-    <%= render @action_button if @action_button.present? %>
+    
   </div>
-  <div class="overflow-hidden bg-white rounded-xl border border-gray-200 shadow-sm">
-    <%# Header %>
-    <div class="flex px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-b border-gray-200">
-      <% @columns.each_with_index do |col, index| %>
-        <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= col[:label] %> </div>
-      <% end %>
+  <%# wrapper %>
+  <div class="wrapper bg-yellow-200 space-y-4 p-6 border-2 border-slate-900 rounded-2xl">
+    <%#  %>
+    <div class="flex justify-end">
+      <%= render @action_button if @action_button.present? %>
+      
     </div>
-
-    <%# Rows %>
-    <% @items.each_with_index do |item, row_index| %>
-      <div class=" flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
+    <div class="overflow-hidden bg-emerald-100 rounded-xl border-4 border-gray-200 shadow-sm">
+      <%# Header %>
+      <div class=" flex px-6 py-4 font-semibold text-gray-700 bg-pink-100 border-b border-gray-200">
         <% @columns.each_with_index do |col, index| %>
-          <div class="flex flex-1 items-center px-4 py-2">
-            <% if col[:custom_render] %>
-              <% @actions.each do |action| %>
-                <div class="flex">
-                  <% 
-                    path_proc = action[:path_proc]
-                    path = if path_proc.arity == 2
-                      path_proc.call(item.project, item)
-                    else
-                      path_proc.call(item)
-                    end
-                  %>
-                  <%= render Library::ButtonComponent.new(
-                    label: action[:label], 
-                    path: path,
-                    variant: action[:variant], 
-                    method: action[:turbo_method] || {},
-                    data: action[:data] || {},
-                  ) %>
-                </div>
-              <% end %>
-              <%# Render pic %>
-            <% elsif col[:show_picture] %>
-              <% if item.photo.attached? %>
-                <%= image_tag item.photo, class: "rounded-md object-cover w-20 h-20 block" %>
-              <% else %>
-                <span class="text-sm italic text-gray-400">No image</span>
-              <% end %>
-            <% else %>
-              <span class="text-sm font-medium text-gray-900">
-                <%= item.send(col[:accessor]) %>
-              </span>
-            <% end %>
-          </div>
+          <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= col[:label] %> </div>
         <% end %>
       </div>
-    <% end %>
-    <%# Pagy %>
+
+      <%# Rows %>
+      <% @items.each_with_index do |item, row_index| %>
+        <div class=" flex justify-between px-6 py-4 text-gray-800 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
+          <% @columns.each_with_index do |col, index| %>
+            <div class="flex flex-1 items-center px-4 py-2">
+              <% if col[:custom_render] %>
+                <% @actions.each do |action| %>
+                  <div class="flex">
+                    <% 
+                      path_proc = action[:path_proc]
+                      path = if path_proc.arity == 2
+                        path_proc.call(item.project, item)
+                      else
+                        path_proc.call(item)
+                      end
+                    %>
+                    <%= render Library::ButtonComponent.new(
+                      label: action[:label], 
+                      path: path,
+                      variant: action[:variant], 
+                      method: action[:turbo_method] || {},
+                      data: action[:data] || {},
+                    ) %>
+                  </div>
+                <% end %>
+                <%# Render pic %>
+              <% elsif col[:show_picture] %>
+                <% if item.photo.attached? %>
+                  <%= image_tag item.photo, class: "rounded-md object-cover w-20 h-20 block" %>
+                <% else %>
+                  <span class="text-sm italic text-gray-400">No image</span>
+                <% end %>
+              <% else %>
+                <span class="text-sm font-medium text-gray-900">
+                  <%= item.send(col[:accessor]) %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%# Pagy %>
+    </div>
   </div>
 </section>
 
