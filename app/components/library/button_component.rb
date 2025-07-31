@@ -1,9 +1,10 @@
 class Library::ButtonComponent < ApplicationComponent
-  def initialize(label:, path:, method: nil, data: {}, variant: nil, style: "")
+  def initialize(label:, path:, method: nil, data: {}, type: nil, variant: nil, style: "")
     @label = label
     @path = path
     @method = method
     @data = data
+    @type = type
     @variant = variant&.to_sym
     @style = style
   end

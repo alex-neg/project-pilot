@@ -1,47 +1,48 @@
-<section class="flex flex-col items-center p-6 min-h-screen bg-red-50">
-    <div class="flex justify-between items-center mb-6 w-full max-w-7xl">
-        <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
-        <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
-    </div>
-    <%# WIP: h-[450px] ?? %>
-    <div class="flex p-6 w-full max-w-5xl bg-green-100 rounded-xl border border-gray-200 shadow-sm flex-col">
-        <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
+<section class="flex flex-col justify-center items-center p-6 min-h-screen">
+    <div class="flex flex-col justify-center items-center p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 min-h-96 w-5xl wrapper">
+        <div class="flex justify-between items-center mb-6 w-full max-w-4xl">
+            <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
+            <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+        </div>
+        <%# WIP: h-[450px] ?? %>
+        <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
+            <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
 
-            <% if fields.include?(:name) %>
-                <%= field.input :name, label: "Name", required: true,
-                # h-[40px] ???
-                    input_html: { class: "h-[40px] w-xl px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" },
-                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-            <% end %>
-
-            <% if fields.include?(:description) %>
-                <%= field.input :description, as: :text, label: "Description",
-                    input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
-                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-            <% end %>
-
-            <% if fields.include?(:sample_type) %>
-                <%= field.input :sample_type, collection: model.class.sample_types.keys, prompt: "Select type",
-                    input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
-                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-            <% end %>
-
-            <% if show_picture %>
-                <% if @model.photo.attached? %>
-                  <div>
-                    <p>Current image</p>
-                    <%= image_tag @model.photo, class: "rounded-md border w-32 h-32 object-cover" %>
-                  </div>
+                <% if fields.include?(:name) %>
+                    <%= field.input :name, label: "Name", required: true,
+                    # h-[40px] ??? adding a cancel btn? add Btn Component => requires updates
+                        input_html: { class: "h-[40px] w-xl px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" },
+                        label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
                 <% end %>
-                <%= field.input :photo, as: :file,
-                    input_html: { class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" },
-                    label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-            <% end %>
-            <%# WIP: Buttons Cancel + Create %>
-            <div class="flex items-center  gap-6">
-                <%= field.button :submit, "Cancel", class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
-                <%= field.button :submit, "Create", class: "bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500 transition" %>
-            </div>
-      <% end %>
+
+                <% if fields.include?(:description) %>
+                    <%= field.input :description, as: :text, label: "Description",
+                        input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
+                        label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+                <% end %>
+
+                <% if fields.include?(:sample_type) %>
+                    <%= field.input :sample_type, collection: model.class.sample_types.keys, prompt: "Select type",
+                        input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
+                        label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+                <% end %>
+
+                <% if show_picture %>
+                    <% if @model.photo.attached? %>
+                    <div>
+                        <p>Current image</p>
+                        <%= image_tag @model.photo, class: "rounded-md border w-32 h-32 object-cover" %>
+                    </div>
+                    <% end %>
+                    <%= field.input :photo, as: :file,
+                        input_html: { class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" },
+                        label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
+                <% end %>
+                <%# WIP: Buttons Cancel + Create %>
+                <div class="flex gap-6 items-center">
+                    <%= field.button :submit, "Create", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
+                </div>
+        <% end %>
+        </div>
     </div>
 </section>
