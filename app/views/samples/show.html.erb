@@ -1,41 +1,14 @@
-
-<%=render Templates::DetailTemplateComponent.new(
-    breadcrumb: [
+<%= render Templates::DetailTemplateComponent.new(
+  model: @sample,
+  breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},
       {label: @sample.name, path: project_samples_path(@project)}
     ],
-    parent: @project,
-    model: @sample,
-    model_details: {
-        name: @sample.name,
-        id: @sample.id,
-        description: @sample.description,
-        sample_type: @sample.sample_type
-    },
-    actions: [
-        Library::ButtonComponent.new(
-                label: "Edit", 
-                path: edit_project_sample_path(@project, @sample),
-                variant: :secondary
-        ),
-        Library::ButtonComponent.new(
-                label: "Delete", 
-                path: project_sample_path(@project, @sample),
-                variant: :danger, 
-                data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-        ),
-    ], 
-    links: [
-        {
-            label: "View Sites", 
-            path_proc: ->(project) {project_sites_path(project)}
-        }, 
-        {
-            label: "View Samples", 
-            path_proc: ->(project) {project_samples_path(project)}
-        }
-    ], 
-    show_picture: true, 
-)%>
+  action_buttons: [
+    Library::ButtonComponent.new(label: "Edit", path: edit_project_sample_path(@project, @sample), variant: :secondary),
+    Library::ButtonComponent.new(label: "Delete", path: project_sample_path(@project, @sample), variant: :danger, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" })
+  ],
+  show_picture: true
+) %>

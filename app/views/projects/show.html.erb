@@ -1,34 +1,16 @@
-<%=render Templates::DetailTemplateComponent.new(
-     breadcrumb: [
-      {label: "Projects", path: projects_path},
-      { label: @project.name, path: project_path(@project)}
-    ],
-    model: @project,
-    model_details: {
-        name: @project.name,
-        id: @project.id
-    },
-    actions: [
-        Library::ButtonComponent.new(
-                label: "Edit", 
-                path: edit_project_path(@project),
-                variant: :secondary
-        ),
-        Library::ButtonComponent.new(
-                label: "Delete", 
-                path: project_path(@project),
-                variant: :danger, 
-                data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-        ),
-    ], 
-    links: [
-        {
-            label: "View Sites", 
-            path_proc: ->(project) {project_sites_path(@project)},
-        }, 
-        {
-            label: "View Samples", 
-            path_proc: ->(project) {project_samples_path(@project)}
-        }
-    ]
-)%>
+<%= render Templates::DetailTemplateComponent.new(
+  model: @project,
+  breadcrumb: [
+    { label: "Projects", path: projects_path },
+    { label: @project.name, path: project_path(@project) }
+  ],
+  nav_buttons: [
+    Library::ButtonComponent.new(label: "View Sites", path: project_sites_path(@project), variant: :primary),
+    Library::ButtonComponent.new(label: "View Samples", path: project_samples_path(@project), variant: :primary)
+  ],
+  action_buttons: [
+    Library::ButtonComponent.new(label: "Edit", path: edit_project_path(@project), variant: :secondary),
+    Library::ButtonComponent.new(label: "Delete", path: project_path(@project), variant: :danger, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" })
+  ],
+  show_picture: false
+) %>

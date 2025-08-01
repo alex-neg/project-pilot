@@ -1,14 +1,21 @@
 class Templates::DetailTemplateComponent < ApplicationComponent
-  def initialize(model:, breadcrumb:,  model_details: [], actions: [], links: [], show_picture: false, action_button: nil, parent: nil)
+  def initialize(model:, breadcrumb:, nav_buttons: [], action_buttons: [], show_picture: false, parent: nil)
     @model = model
     @breadcrumb = breadcrumb
-    @model_details = model_details
-    @actions = actions
-    @links = links
-    @action_button = action_button
-    @parent = parent
+    @nav_buttons = nav_buttons
+    @action_buttons = action_buttons
     @show_picture = show_picture
+    @parent = parent
   end
 
-  attr_reader :model, :model_details, :actions, :links
+  def model_details
+    {
+      name: @model.name,
+      id: @model.id,
+      description: @model.try(:description),
+      type: @model.try(:sample_type)
+    }
+  end
+
+  attr_reader :model, :breadcrumb, :nav_buttons, :action_buttons, :show_picture
 end

@@ -1,46 +1,55 @@
-<section class="p-6 mx-auto space-y-4 max-w-5xl min-h-screen bg-amber-50">
-    <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
-        <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
-    </div>
-    <div>
-        <%= link_to "← Back to Projects", projects_path, class: "text-sm text-indigo-600 hover:underline" %>
-    </div>
-
-    <div class="space-y-4">
-        <div class="flex flex-col justify-between items-start px-6 py-4 bg-red-50 rounded-lg border shadow border-slate-200 md:flex-row md:items-center">
-            <!-- Left -->
-            <div class="flex flex-col space-y-1">
-                <h2 class="text-lg font-semibold text-gray-800"> <%= model_details[:name] %> </h2>
-                <p class="text-sm text-gray-500">ID: <%= model_details[:id] %> </p>
-                
-                <% if model_details[:description].present? %>
-                    <p class="text-sm text-gray-500">Description: <%= model_details[:description] %> </p>
-                <% end %>
-                
-                <% if model_details[:sample_type].present? %>
-                    <p class="text-sm text-gray-500">Status: <%= model_details[:sample_type] %> </p>
-                <% end %>
-
-                <% links.each do |link| %>
-                    <a href="<%= link[:path_proc].call(model) %>" class="text-sm text-indigo-600 hover:underline">
-                        <%= link[:label] %>
-                    </a>
-                <% end %>
-            </div>
-
-            <!-- Render Image if present -->
-            <% if model.respond_to?(:photo) && model.photo.attached? %>
-                <div class="mt-4 md:mt-0">
-                    <%= image_tag model.photo, class: "rounded-md object-cover w-48 h-48 border border-gray-300" %>
-                </div>
+<section class="p-6 min-h-screen">
+  <div class="justify-center items-center mx-auto max-w-4xl">
+    <!-- Breadcrumb + Nav Buttons -->
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <div class="text-sm breadcrumb">
+        <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
+      </div>
+      
+        <% if nav_buttons.any? %>
+          <div class="flex gap-3">
+            <% nav_buttons.each do |button| %>
+              <%= render button %>
             <% end %>
-
-            <!-- Right -->
-            <div class="flex mt-4 space-x-2 md:mt-0">
-                <% actions.each do |action_button| %>
-                    <%= render action_button if action_button.present? %>
-                <% end %>
-            </div>
-        </div>
+          </div>
+        <% end %>
     </div>
+
+    <!-- Card -->
+    <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
+      <%# Image + Content %>
+      <div class="flex justify-between">
+        <!-- Card Content + Action btns-->
+        <div class="p-2 space-y-4">
+          <% if model_details[:name].present? %>
+            <h2 class="text-2xl font-semibold text-gray-800"><%= model_details[:name] %></h2>
+          <% end %>
+          <% model_details.each do |key, value| %>
+            <% next if value.blank? || key == :name %>
+            <p class="text-gray-700">
+              <strong><%= key.to_s.humanize %>:</strong>
+              <%= value %>
+            </p>
+          <% end %>
+          <%# Action buttons %>
+          <% if action_buttons.any? %>
+            <div class="mt-6">
+              <% action_buttons.each do |button| %>
+                <%= render button %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Image if present -->
+        <% if show_picture && model.respond_to?(:photo) && model.photo.attached? %>
+          <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+            <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+
+  </div>
 </section>
