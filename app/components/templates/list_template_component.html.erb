@@ -2,7 +2,7 @@
   <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
     <h2 class="text-lg font-semibold text-gray-800"><%= @title %></h2>
     <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
-    
+    <%== helpers.pagy_nav(@pagy) %>
   </div>
   <%# wrapper %>
   <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper">

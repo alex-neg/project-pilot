@@ -17,8 +17,7 @@ SimpleForm.setup do |config|
     b.use :label, class: "block text-gray-700 font-semibold mb-2"
 
     # Input with base Tailwind classes, plus error border if error_class applies
-    b.use :input, class: "w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-
+    b.use :input, class: "h-[40px] w-xl px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
     # Hint text below input
     b.use :hint, wrap_with: { tag: :p, class: "text-gray-500 text-sm mt-1" }
 
