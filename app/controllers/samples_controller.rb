@@ -1,7 +1,7 @@
 class SamplesController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @samples = @project.samples
+    @pagy, @samples = pagy(@project.samples, limit: 5)
   end
 
   def show

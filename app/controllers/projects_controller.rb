@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @pagy, @projects = pagy(Project.all, limit: 10)
+    @pagy, @projects = pagy(Project.all, limit: 5)
   end
 
   def show

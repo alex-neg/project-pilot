@@ -1,7 +1,7 @@
 class SitesController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @sites = @project.sites
+    @pagy, @sites = pagy(@project.sites, limit: 5)
   end
 
   def show
