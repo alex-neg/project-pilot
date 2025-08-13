@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :projects do
     resources :sites
     resources :samples
+    resources :small_finds
   end
 end

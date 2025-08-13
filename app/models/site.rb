@@ -1,4 +1,4 @@
 class Site < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: { message: "Name is required" }
   belongs_to :project
 end

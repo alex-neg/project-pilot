@@ -4,7 +4,7 @@
     <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
   </div>
   <%# wrapper %>
-  <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper">
+  <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
     <%#  %>
     <div class="flex justify-end">
       <%= render @action_button if @action_button.present? %>
@@ -44,13 +44,14 @@
                   </div>
                 <% end %>
                 <%# Render pic %>
-              <% elsif col[:show_picture] %>
-                <% if item.photo.attached? %>
-                  <%= image_tag item.photo, class: "rounded-md object-cover w-20 h-20 block" %>
+                <% elsif col[:show_picture] %>
+                <% accessor = col[:picture_accessor] || :photo %>
+                <% if item.try(accessor).respond_to?(:attached?) && item.send(accessor).attached? %>
+                  <%= image_tag item.send(accessor), class: "rounded-md object-cover w-20 h-20 block" %>
                 <% else %>
                   <span class="text-sm italic text-gray-400">No image</span>
                 <% end %>
-              <% else %>
+                <% else %>
                 <span class="text-sm font-medium text-gray-900">
                   <%= item.send(col[:accessor]) %>
                 </span>
@@ -63,7 +64,7 @@
     </div>
   </div>
   <div class="flex justify-center py-4 bg-red-50">
-    <%== helpers.pagy_nav(@pagy) %>
+    <%== helpers.pagy_nav(@pagy) if @pagy.present? %>
   </div>
 </section>
 

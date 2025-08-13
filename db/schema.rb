@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_18_124709) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_13_160446) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,8 +63,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_124709) do
     t.index ["project_id"], name: "index_sites_on_project_id"
   end
 
+  create_table "small_finds", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "find_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_small_finds_on_project_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "samples", "projects"
   add_foreign_key "sites", "projects"
+  add_foreign_key "small_finds", "projects"
 end

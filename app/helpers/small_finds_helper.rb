@@ -1,0 +1,2 @@
+module SmallFindsHelper
+end
