@@ -6,57 +6,35 @@
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
-      <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |field| %>
-        
-        <%= field.input :name, label: "Name", required: true %>
-
-        <% if fields.include?(:description) %>
-          <%= field.input :description, as: :text, label: "Description",
-            input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
-            label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-        <% end %>
-
-        <% if fields.include?(:sample_type) %>
-          <%= field.input :sample_type, collection: model.class.sample_types.keys, prompt: "Select type",
-            input_html: { class: "w-full px-3 py-2 border border-gray-300 rounded" },
-            label_html: { class: "block text-gray-700 font-semibold mb-2" } %>
-        <% end %>
-
-        <% if show_picture %>
-          <% 
-            photo_attrs = [:photo_before, :photo_after]
-            existing_photos = photo_attrs.select do |attr| 
-              @model.respond_to?(attr) && @model.send(attr).attached?
-            end
-
-            if existing_photos.empty? && @model.respond_to?(:photo) && @model.photo.attached?
-              existing_photos = [:photo]
-            end
-          %>
-
-          <% if existing_photos.any? %>
-            <% existing_photos.each do |photo_attr| %>
+      <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |f| %>
+        <% fields.each do |field_name| %>
+            <% if [:photo, :photo_before, :photo_after].include?(field_name) %>
               <div class="mb-4">
-                <p>Current <%= photo_attr.to_s.humanize %></p>
-                <%= image_tag @model.send(photo_attr), class: "rounded-md border w-32 h-32 object-cover" %>
+                <%= f.input field_name, as: :file,
+                  label_html: {class: "block text-sm font-medium text-gray-700"},
+                  input_html: {class: "mt-1 block w-full text-gray-900"}
+                %>
+              </div>
+            <% elsif field_name == :sample_type %>
+              <div class="mb-4">
+                <%= f.input :sample_type, as: :select, collection: Sample.sample_types.keys,
+                include_blank: false,
+                label_html: {class: "block text-sm font-medium text-gray-700"},
+                input_html: {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+                %>
+              </div>
+            
+            <% else %>
+              <div class="mb-4">
+                <%= f.input field_name,
+                  label_html: {class: "block text-sm font-medium text-gray-700"},
+                  input_html: {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+                %>
               </div>
             <% end %>
-          <% else %>
-            <p class="text-sm italic text-gray-400">No image uploaded</p>
-          <% end %>
-
-          <% (existing_photos.presence || [:photo_before, :photo_after, :photo]).each do |photo_attr| %>
-            <%= field.input photo_attr, as: :file,
-              input_html: {
-                class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200"
-              },
-              label_html: { class: "block text-gray-700 font-semibold mb-2" },
-              label: "Upload #{photo_attr.to_s.humanize}" %>
-          <% end %>
         <% end %>
-
         <div class="flex gap-6 items-center">
-          <%= field.button :submit, "Create", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
+          <%= f.button :submit, "Create", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
         </div>
       <% end %>
     </div>
