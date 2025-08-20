@@ -5,6 +5,8 @@ class SmallFindsController < ApplicationController
   end
 
   def show
+    @project = Project.find(params[:project_id])
+    @small_find = @project.small_finds.find(params[:id])
   end
 
   def new
@@ -13,14 +15,40 @@ class SmallFindsController < ApplicationController
   end
 
   def edit
+    @project = Project.find(params[:project_id])
+    @small_find = @project.small_find.find(params[:id])
   end
 
   def create
+    @project = Project.find(params[:project_id])
+    @small_find = @project.small_finds.new(small_find_params)
+    if @small_find.save
+      redirect_to project_sample_path(@project, @small_find), notice: "Small Find created!"
+    else
+      render :new
+    end
   end
 
   def update
+    @project = Project.find(params[:project_id])
+    @small_find = @project.small_finds.find(small_finds_params)
+    if @small_find.update
+      redirect_to project_sample_path(@project, @small_find), notice: "Small Find updated!"
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
+    @small_find = @project.small_finds.find(params[:id])
+    @small_find.destroy
+    redirect_to project_small_finds_path(@project), notice: "Small Find deleted!"
+  end
+
+  private
+
+  def small_find_params
+    params.require(:small_find).permit(:name, :description, :find_type, :before_photo, :after_photo)
   end
 end
