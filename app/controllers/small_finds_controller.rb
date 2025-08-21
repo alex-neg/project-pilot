@@ -16,7 +16,7 @@ class SmallFindsController < ApplicationController
 
   def edit
     @project = Project.find(params[:project_id])
-    @small_find = @project.small_find.find(params[:id])
+    @small_find = @project.small_finds.find(params[:id])
   end
 
   def create

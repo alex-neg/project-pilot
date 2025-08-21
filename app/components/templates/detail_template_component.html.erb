@@ -20,7 +20,7 @@
       <%# Image + Content %>
       <div class="flex justify-between">
         <!-- Card Content + Action btns-->
-        <div class="p-2 space-y-4">
+        <div class="p-2 space-y-4 w-96">
           <% if model_details[:name].present? %>
             <h2 class="text-2xl font-semibold text-gray-800"><%= model_details[:name] %></h2>
           <% end %>
@@ -42,10 +42,24 @@
         </div>
 
         <!-- Image if present -->
-        <% if show_picture && model.respond_to?(:photo) && model.photo.attached? %>
-          <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-            <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-          </div>
+        <% if show_picture %>
+          <% if model.respond_to?(:photo) && model.photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
+
+          <% if model.respond_to?(:before_photo) && model.before_photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.before_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
+
+          <% if model.respond_to?(:after_photo) && model.after_photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.after_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
         <% end %>
       </div>
       
