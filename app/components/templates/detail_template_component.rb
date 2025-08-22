@@ -13,7 +13,7 @@ class Templates::DetailTemplateComponent < ApplicationComponent
       name: @model.name,
       id: @model.id,
       description: @model.try(:description),
-      type: @model.try(:sample_type) || @model.try(:find_type)
+      type: (@model.try(:sample_type) || @model.try(:find_type))&.capitalize
     }
   end
 

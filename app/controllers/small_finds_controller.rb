@@ -1,7 +1,7 @@
 class SmallFindsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @small_finds = @project.small_finds
+    @pagy, @small_finds = pagy(@project.small_finds, limit: 5)
   end
 
   def show
