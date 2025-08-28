@@ -1,26 +1,18 @@
 class Library::ButtonComponent < ApplicationComponent
-  def initialize(label:, path:, method: nil, data: {}, type: nil, variant: nil, style: "")
+  def initialize(label:, path:, data: {}, variant: :primary)
     @label = label
     @path = path
-    @method = method
     @data = data
-    @type = type
-    @variant = variant&.to_sym
-    @style = style
+    @variant = variant
   end
 
-  def style
-    @style.presence || default_style
+  def classes 
+    return base_style if @variant.nil?
+    variant_styles[@variant]
   end
 
-  def default_style
-    base = "text-gray-800 hover:underline cursor-pointer mr-2"
-
-    if @variant.nil?
-      base
-    else
-      "#{variant_styles[@variant] || variant_styles[:primary]}"
-    end
+  def base_style
+    "text-gray-800 hover:underline cursor-pointer mr-2"
   end
 
   def variant_styles

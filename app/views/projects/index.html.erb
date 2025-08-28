@@ -10,35 +10,42 @@
       ),
   rows: @projects,
   pagy: @pagy,
-  columns: [ 
-    {
-      label: "ID", 
-      accessor: :id, 
-    }, 
-    {
-      label: "Name", 
-      accessor: :name,
-    },
-    {
-      label: "Actions", 
-      custom_render: true
-    }
-  ], 
-  actions: [
-    {
-      label: "View", 
-      path_proc: ->(project) {project_path(project)},
-    
-    }, 
-    {
-      label: "Edit", 
-      path_proc: ->(project) {edit_project_path(project)},
-    }, 
-    {
-      label: "Delete", 
-      path_proc: ->(project) {project_path(project)},
-      variant: :link_danger,
-      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-    }
-  ]
+
+  attributes: {
+    columns: [
+      {
+        label: "ID",
+        accessor: :id
+      }, 
+      {
+        label: "Name",
+        accessor: :name
+      },
+      {
+        label: "Controls",
+        custom_render: :true
+      }
+    ], 
+    actions: [
+      {
+        label: "View",
+        path_proc: ->(project) {project_path(project)},
+        variant: :link
+      },
+      {
+        label: "Edit",
+        path_proc: ->(project) {edit_project_path(project)},
+        variant: :link
+      },
+      {
+        label: "Delete",
+        path_proc: ->(project) {project_path(project)},
+        variant: :link_danger,
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        }
+      }
+    ]
+  }
 )%>

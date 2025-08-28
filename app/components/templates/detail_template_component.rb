@@ -1,9 +1,8 @@
 class Templates::DetailTemplateComponent < ApplicationComponent
-  def initialize(model:, items:, nav_buttons: [], action_buttons: [], show_picture: false, parent: nil)
+  def initialize(model:, items:, attributes: [], show_picture: false, parent: nil)
     @model = model
     @items = items
-    @nav_buttons = nav_buttons
-    @action_buttons = action_buttons
+    @attributes = attributes
     @show_picture = show_picture
     @parent = parent
   end
@@ -17,5 +16,5 @@ class Templates::DetailTemplateComponent < ApplicationComponent
     }
   end
 
-  attr_reader :model, :items, :nav_buttons, :action_buttons, :show_picture
+  attr_reader :model, :items, :attributes, :show_picture
 end
