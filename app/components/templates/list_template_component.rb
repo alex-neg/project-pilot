@@ -1,9 +1,9 @@
 class Templates::ListTemplateComponent < ApplicationComponent
-  def initialize(breadcrumb:, title:, items:, columns:, actions:, pagy:, action_button: nil)
-    @breadcrumb = breadcrumb
+  def initialize(items:, title:, rows:, columns:, actions:, pagy:, action_button: nil)
+    @items = items
     @title = title
     @columns = columns
-    @items = items
+    @rows = rows
     @actions = actions
     @pagy = pagy
     @action_button = action_button

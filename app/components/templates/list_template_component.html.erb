@@ -1,7 +1,7 @@
 <section class="p-6">
   <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
     <h2 class="text-lg font-semibold text-gray-800"><%= @title %></h2>
-    <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+    <%= render Library::BreadcrumbComponent.new(items: @items) if @items.present? %>
   </div>
   <%# wrapper %>
   <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
@@ -19,7 +19,7 @@
       </div>
 
       <%# Rows %>
-      <% @items.each_with_index do |item, row_index| %>
+      <% @rows.each_with_index do |item, row_index| %>
         <div class=" flex justify-between px-6 py-4 text-gray-800 border-b border-slate-200 hover:bg-slate-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
           <% @columns.each_with_index do |col, index| %>
             <div class="flex flex-1 items-center px-4 py-2">

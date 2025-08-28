@@ -3,7 +3,7 @@
     <!-- Breadcrumb + Nav Buttons -->
     <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
       <div class="text-sm breadcrumb">
-        <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
+        <%= render Library::BreadcrumbComponent.new(items: items) if items.present? %>
       </div>
       
         <% if nav_buttons.any? %>

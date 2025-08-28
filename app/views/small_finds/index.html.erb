@@ -1,5 +1,5 @@
 <%= render Templates::ListTemplateComponent.new(
-    breadcrumb: [
+    items: [
       {label: "Projects", path: projects_path}, 
       {label: @project.name, path: project_path(@project)},
       {label: "Small Finds", path: project_small_finds_path(@project)}
@@ -10,7 +10,7 @@
         path: new_project_small_find_path(@project, @small_find),
         variant: :primary
       ),
-      items: @small_finds,
+      rows: @small_finds,
       pagy: @pagy,
       columns: [ 
     {

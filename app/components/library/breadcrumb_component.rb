@@ -1,5 +1,5 @@
 class Library::BreadcrumbComponent < ApplicationComponent
-  def initialize(breadcrumb:)
-    @breadcrumb = breadcrumb
+  def initialize(items:)
+    @items = items
   end
 end
