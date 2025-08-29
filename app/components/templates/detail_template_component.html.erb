@@ -1,69 +1,40 @@
 <section class="p-6 min-h-screen">
   <div class="justify-center items-center mx-auto max-w-4xl">
-    <!-- Breadcrumb + Nav Buttons -->
-    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
-      <div class="text-sm breadcrumb">
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6 bg-amber-100">
+      <!-- Breadcrumb -->
+      <div class="text-sm bg-red-50 breadcrumb">
         <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
       </div>
-      
-        <% if nav_buttons.any? %>
+      <%# Links to Sites, Samples, Small Finds %>
+        <% @attributes[:links].each do |link| %>
           <div class="flex gap-3">
-            <% nav_buttons.each do |button| %>
-              <%= render button %>
-            <% end %>
+            <%= render Library::ButtonComponent.new(
+            label: link[:label],
+            path: link[:path],
+            variant: link[:variant]
+            ) %>
           </div>
         <% end %>
     </div>
 
     <!-- Card -->
     <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
-      <%# Image + Content %>
-      <div class="flex justify-between">
-        <!-- Card Content + Action btns-->
-        <div class="p-2 space-y-4 w-96">
-          <% if model_details[:name].present? %>
-            <h2 class="text-2xl font-semibold text-gray-800"><%= model_details[:name] %></h2>
-          <% end %>
-          <% model_details.each do |key, value| %>
-            <% next if value.blank? || key == :name %>
-            <p class="text-gray-700">
-              <strong><%= key.to_s.humanize %>:</strong>
-              <%= value %>
-            </p>
-          <% end %>
-          <%# Action buttons %>
-          <% if action_buttons.any? %>
-            <div class="mt-6">
-              <% action_buttons.each do |button| %>
-                <%= render button %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-
-        <!-- Image if present -->
-        <% if show_picture %>
-          <% if model.respond_to?(:photo) && model.photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
-
-          <% if model.respond_to?(:before_photo) && model.before_photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.before_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
-
-          <% if model.respond_to?(:after_photo) && model.after_photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.after_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
+      <div class="p-2 space-y-4 w-96 bg-green-100">
+      <%# Resource Details: Name, ID, Description etc %>
+        <% @attributes[:details].each do |item| %>
+          <%= item[:label] %>:<%= item[:value] %>
         <% end %>
       </div>
-      
+      <div class="mt-6">
+        <%# Action buttons: Edit, Delete %>
+        <% @attributes[:actions].each do |action| %>
+          <%= render Library::ButtonComponent.new(
+            label: action[:label],
+            path: action[:path],
+            variant: action[:variant]
+          ) %>
+        <% end %>
+      </div>
     </div>
-
   </div>
 </section>

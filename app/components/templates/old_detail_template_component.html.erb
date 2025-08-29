@@ -1,0 +1,69 @@
+<section class="p-6 min-h-screen">
+  <div class="justify-center items-center mx-auto max-w-4xl">
+    <!-- Breadcrumb + Nav Buttons -->
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <div class="text-sm breadcrumb">
+        <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
+      </div>
+      
+        <% if nav_buttons.any? %>
+          <div class="flex gap-3">
+            <% nav_buttons.each do |button| %>
+              <%= render button %>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+
+    <!-- Card -->
+    <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
+      <%# Image + Content %>
+      <div class="flex justify-between">
+        <!-- Card Content + Action btns-->
+        <div class="p-2 space-y-4 w-96">
+          <% if model_details[:name].present? %>
+            <h2 class="text-2xl font-semibold text-gray-800"><%= model_details[:name] %></h2>
+          <% end %>
+          <% model_details.each do |key, value| %>
+            <% next if value.blank? || key == :name %>
+            <p class="text-gray-700">
+              <strong><%= key.to_s.humanize %>:</strong>
+              <%= value %>
+            </p>
+          <% end %>
+          <%# Action buttons %>
+          <% if action_buttons.any? %>
+            <div class="mt-6">
+              <% action_buttons.each do |button| %>
+                <%= render button %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Image if present -->
+        <% if show_picture %>
+          <% if model.respond_to?(:photo) && model.photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
+
+          <% if model.respond_to?(:before_photo) && model.before_photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.before_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
+
+          <% if model.respond_to?(:after_photo) && model.after_photo.attached? %>
+            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
+              <%= image_tag model.after_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+    </div>
+
+  </div>
+</section>
