@@ -13,50 +13,49 @@
   #   Library::ButtonComponent.new(label: "Edit", path: edit_project_path(@project), variant: :secondary),
   #   Library::ButtonComponent.new(label: "Delete", path: project_path(@project), variant: :danger, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" })
   # ],
-  attributes: {
-    details: [
+    attributes: [
     {
       label: "Name",
-      value: @project.name
+      value: @project.name,
     },
     {
-      label: "Id",
+      label: "ID",
       value: @project.id
     },
-    ], 
-    links: [
     {
-      label: "Sites", 
-      path: project_sites_path(@project), 
-      variant: :primary
-    }, 
+      label: "Sites",
+      path: project_sites_path(@project),
+      variant: :link,
+      count: @project.sites.count
+    },
     {
       label: "Samples",
       path: project_samples_path(@project),
-      variant: :primary
-    }, 
+      variant: :link, 
+      count: @project.samples.count
+    },
     {
       label: "Small Finds",
       path: project_small_finds_path(@project),
-      variant: :primary
+      variant: :link,
+      count: @project.small_finds.count
+    }
+  ],
+  actions: [
+    {
+      label: "Edit",
+      path: edit_project_path(@project),
+      variant: :secondary,
     },
-    ],
-    actions: [
-      {
-        label: "Edit",
-        path: edit_project_path(@project),
-        variant: :secondary
-      },
-      {
-        label: "Delete",
-        path: project_path(@project),
-        variant: :danger,
-        data: {
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?"
-        }
+    {
+      label: "Delete",
+      path: project_path(@project),
+      variant: :danger,
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
       }
-    ]
-  },
-  show_picture: false
+    }
+  ]
+  # show_picture: false
 ) %>

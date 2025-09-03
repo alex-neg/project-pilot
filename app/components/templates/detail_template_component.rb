@@ -1,11 +1,11 @@
 class Templates::DetailTemplateComponent < ApplicationComponent
   # removing nav_buttons: [], action_buttons: []
-  def initialize(model:, breadcrumb:, attributes: [], show_picture: false, parent: nil)
+  def initialize(model:, breadcrumb:, attributes: [], actions: [], show_picture: false, parent: nil)
     @model = model
     @breadcrumb = breadcrumb
     @attributes = attributes
     # @nav_buttons = nav_buttons
-    # @action_buttons = action_buttons
+    @actions = actions
     @show_picture = show_picture
     @parent = parent
   end
@@ -20,5 +20,5 @@ class Templates::DetailTemplateComponent < ApplicationComponent
   #   }
   # end
 
-  attr_reader :model, :breadcrumb, :attributes, :show_picture
+  attr_reader :model, :breadcrumb, :attributes, :actions, :show_picture
 end

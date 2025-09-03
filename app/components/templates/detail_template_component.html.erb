@@ -5,13 +5,13 @@
       <div class="text-sm bg-red-50 breadcrumb">
         <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
       </div>
-      <%# Links to Sites, Samples, Small Finds %>
-        <% @attributes[:links].each do |link| %>
+      <%#  %>
+        <% @actions.each do |item| %>
           <div class="flex gap-3">
             <%= render Library::ButtonComponent.new(
-            label: link[:label],
-            path: link[:path],
-            variant: link[:variant]
+            label: item[:label],
+            path: item[:path],
+            # variant: item[:variant]
             ) %>
           </div>
         <% end %>
@@ -19,22 +19,25 @@
 
     <!-- Card -->
     <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
-      <div class="p-2 space-y-4 w-96 bg-green-100">
-      <%# Resource Details: Name, ID, Description etc %>
-        <% @attributes[:details].each do |item| %>
-          <%= item[:label] %>:<%= item[:value] %>
-        <% end %>
-      </div>
-      <div class="mt-6">
-        <%# Action buttons: Edit, Delete %>
-        <% @attributes[:actions].each do |action| %>
-          <%= render Library::ButtonComponent.new(
-            label: action[:label],
-            path: action[:path],
-            variant: action[:variant]
-          ) %>
-        <% end %>
-      </div>
+      <%= @model.name %>
+      <table class="min-w-full text-left text-gray-700 table-auto text-md">
+        <tbody>
+          <% @attributes.each do |item| %>
+            <tr class="border-b border-gray-300">
+              <td class="border-amber-500">
+                <% if item[:value] == @model.name %>
+                  <%= "" %>
+                <% elsif item[:variant].present? %>
+                  <%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %>
+                <% else %>
+                  <%= item[:value] %>
+                <% end %>
+                <%# also need to add type case and image case %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
