@@ -1,36 +1,38 @@
 <section class="p-6 min-h-screen">
   <div class="justify-center items-center mx-auto max-w-4xl">
-    <div class="flex flex-wrap gap-4 justify-between items-center mb-6 bg-amber-100">
-      <!-- Breadcrumb -->
-      <div class="text-sm bg-red-50 breadcrumb">
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <!-- Breadcrumb items -->
+      <div class="text-sm breadcrumb">
         <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
       </div>
-      <%#  %>
+      <%# Edit and Delete btns %>
+      <div class="flex gap-3">
         <% @actions.each do |item| %>
-          <div class="flex gap-3">
-            <%= render Library::ButtonComponent.new(
+          <%= render Library::ButtonComponent.new(
             label: item[:label],
             path: item[:path],
-            # variant: item[:variant]
-            ) %>
-          </div>
+            variant: item[:variant], 
+            data: item[:data]
+          ) %>
         <% end %>
+      </div>
     </div>
 
     <!-- Card -->
     <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
-      <%= @model.name %>
+      <h2 class="text-xl font-semibold text-gray-800"><%= @model.name %></h2>
       <table class="min-w-full text-left text-gray-700 table-auto text-md">
         <tbody>
           <% @attributes.each do |item| %>
-            <tr class="border-b border-gray-300">
-              <td class="border-amber-500">
+            <tr class="">
+              <td class="h-8">
                 <% if item[:value] == @model.name %>
                   <%= "" %>
                 <% elsif item[:variant].present? %>
-                  <%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %>
+                
+                  <p class="text-lg text-gray-700"><%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %></p>
                 <% else %>
-                  <%= item[:value] %>
+                  <p class="text-lg text-gray-700"><%= item[:label] %>: <%= item[:value] %></p>
                 <% end %>
                 <%# also need to add type case and image case %>
               </td>
