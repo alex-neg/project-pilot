@@ -1,5 +1,5 @@
 <%=render Templates::ListTemplateComponent.new(
-  breadcrumb: [
+  items: [
     {label: "Projects", path: projects_path}
     ],
   title: "Projects",
@@ -8,7 +8,7 @@
         path: new_project_path,
         variant: :primary
       ),
-  items: @projects,
+  resource: @projects,
   pagy: @pagy,
   columns: [ 
     {

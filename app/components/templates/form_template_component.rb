@@ -1,7 +1,7 @@
 class Templates::FormTemplateComponent < ApplicationComponent
-  def initialize(model:, breadcrumb:, title:, actions: [], fields: [], show_picture: false, parent: nil)
+  def initialize(model:, items:, title:, actions: [], fields: [], show_picture: false, parent: nil)
     @model = model
-    @breadcrumb = breadcrumb
+    @items = items
     @title = title
     @actions = actions
     @fields = fields.map(&:to_sym)

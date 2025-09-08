@@ -1,6 +1,6 @@
 <nav class="inline-flex items-center py-3 space-x-2 breadcrumbs">
-  <% @breadcrumb.each_with_index do |item, index| %>
-    <% is_last = index == @breadcrumb.length - 1 %>
+  <% @items.each_with_index do |item, index| %>
+    <% is_last = index == @items.length - 1 %>
     
     <div class="flex items-center space-x-2">
       <% if item[:path] && !is_last %>

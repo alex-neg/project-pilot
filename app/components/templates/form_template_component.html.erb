@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center items-center p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 min-h-96 w-5xl wrapper">
     <div class="flex justify-between items-center mb-6 w-full max-w-4xl">
       <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
-      <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+      <%= render Library::BreadcrumbComponent.new(items: @items) if @items.present? %>
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
