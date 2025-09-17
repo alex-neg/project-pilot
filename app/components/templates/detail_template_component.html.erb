@@ -20,13 +20,13 @@
 
     <!-- Card -->
     <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
-      <h2 class="text-xl font-semibold text-gray-800"><%= @model.name %></h2>
+      <h2 class="text-xl font-semibold text-red-800"><%= title %></h2>
       <table class="min-w-full text-left text-gray-700 table-auto text-md">
         <tbody>
           <% @attributes.each do |item| %>
             <tr class="">
               <td class="h-8">
-                <% if item[:value] == @model.name %>
+                <% if item[:value] == title %>
                   <%= "" %>
                 <% elsif item[:variant].present? %>
                 

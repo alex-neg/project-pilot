@@ -1,5 +1,5 @@
 <%= render Templates::DetailTemplateComponent.new(
-  model: @project,
+  title: @project.name,
   items: [
     { label: "Projects", path: projects_path },
     { label: @project.name, path: project_path(@project) }
