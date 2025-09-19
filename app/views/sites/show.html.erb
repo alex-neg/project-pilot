@@ -1,6 +1,6 @@
 <%= render Templates::DetailTemplateComponent.new(
-  model: @site,
-  items: [
+  title: @site.name,
+  breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Sites", path: project_sites_path(@project)},
@@ -15,6 +15,10 @@
       label: "ID",
       value: @site.id
     },
+    {
+      label: "Project ID",
+      value: @project.id
+    }
   ],
   actions: [
     {
@@ -32,5 +36,4 @@
       }
     }
   ],
-  show_picture: false
 ) %>

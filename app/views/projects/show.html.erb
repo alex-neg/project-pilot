@@ -1,6 +1,6 @@
 <%= render Templates::DetailTemplateComponent.new(
   title: @project.name,
-  items: [
+  breadcrumb: [
     { label: "Projects", path: projects_path },
     { label: @project.name, path: project_path(@project) }
   ],
@@ -48,5 +48,4 @@
       }
     }
   ]
-  # show_picture: false
 ) %>

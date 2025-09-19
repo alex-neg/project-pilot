@@ -1,6 +1,6 @@
 <%= render Templates::DetailTemplateComponent.new(
-  model: @sample,
-  items: [
+  title: @sample.name,
+  breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},

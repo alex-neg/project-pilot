@@ -1,7 +1,7 @@
 <%=render Templates::FormTemplateComponent.new(
   parent: @project,
   model: @site,
-  items: [
+  breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Sites", path: project_sites_path(@project)},

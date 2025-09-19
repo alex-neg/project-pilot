@@ -1,5 +1,7 @@
 class Library::BreadcrumbComponent < ApplicationComponent
-  def initialize(items:)
-    @items = items
+  def initialize(breadcrumb:)
+    @breadcrumb = breadcrumb
   end
+
+  attr_reader :breadcrumb
 end
