@@ -6,7 +6,7 @@
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
-      <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", multipart: true }) do |f| %>
+      <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", local: true }) do |f| %>
         <% fields.each do |field_name| %>
             <% if [:photo, :before_photo, :after_photo].include?(field_name) %>
               <div class="mb-4">
@@ -41,7 +41,7 @@
             <% end %>
         <% end %>
         <div class="flex gap-6 items-center">
-          <%= f.button :submit, "Create", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
+          <%= f.button :submit, "Update", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
         </div>
       <% end %>
     </div>

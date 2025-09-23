@@ -1,69 +1,45 @@
 <section class="p-6 min-h-screen">
   <div class="justify-center items-center mx-auto max-w-4xl">
-    <!-- Breadcrumb + Nav Buttons -->
     <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <!-- Breadcrumb items -->
       <div class="text-sm breadcrumb">
         <%= render Library::BreadcrumbComponent.new(breadcrumb: breadcrumb) if breadcrumb.present? %>
       </div>
-      
-        <% if nav_buttons.any? %>
-          <div class="flex gap-3">
-            <% nav_buttons.each do |button| %>
-              <%= render button %>
-            <% end %>
-          </div>
+      <%# Edit and Delete btns %>
+      <div class="flex gap-3">
+        <% @actions.each do |item| %>
+          <%= render Library::ButtonComponent.new(
+            label: item[:label],
+            path: item[:path],
+            variant: item[:variant], 
+            data: item[:data]
+          ) %>
         <% end %>
+      </div>
     </div>
 
     <!-- Card -->
     <div class="overflow-hidden p-4 rounded-lg border border-gray-200 shadow-md">
-      <%# Image + Content %>
-      <div class="flex justify-between">
-        <!-- Card Content + Action btns-->
-        <div class="p-2 space-y-4 w-96">
-          <% if model_details[:name].present? %>
-            <h2 class="text-2xl font-semibold text-gray-800"><%= model_details[:name] %></h2>
+      <h2 class="text-xl font-semibold text-red-800"><%= title %></h2>
+      <table class="min-w-full text-left text-gray-700 table-auto text-md">
+        <tbody>
+          <% @attributes.each do |item| %>
+            <tr class="">
+              <td class="h-8">
+                <% if item[:value] == title %>
+                  <%= "" %>
+                <% elsif item[:variant].present? %>
+                
+                  <p class="text-lg text-gray-700"><%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %></p>
+                <% else %>
+                  <p class="text-lg text-gray-700"><%= item[:label] %>: <%= item[:value] %></p>
+                <% end %>
+                <%# also need to add type case and image case %>
+              </td>
+            </tr>
           <% end %>
-          <% model_details.each do |key, value| %>
-            <% next if value.blank? || key == :name %>
-            <p class="text-gray-700">
-              <strong><%= key.to_s.humanize %>:</strong>
-              <%= value %>
-            </p>
-          <% end %>
-          <%# Action buttons %>
-          <% if action_buttons.any? %>
-            <div class="mt-6">
-              <% action_buttons.each do |button| %>
-                <%= render button %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-
-        <!-- Image if present -->
-        <% if show_picture %>
-          <% if model.respond_to?(:photo) && model.photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
-
-          <% if model.respond_to?(:before_photo) && model.before_photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.before_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
-
-          <% if model.respond_to?(:after_photo) && model.after_photo.attached? %>
-            <div class="p-6 bg-gray-50 border-l border-gray-200 md:w-2/4">
-              <%= image_tag model.after_photo, class: "rounded-md object-cover max-h-48 w-full border border-gray-300" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      
+        </tbody>
+      </table>
     </div>
-
   </div>
 </section>

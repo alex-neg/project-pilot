@@ -19,7 +19,7 @@
       </div>
 
       <%# Rows %>
-      <% @items.each_with_index do |item, row_index| %>
+      <% @resource.each_with_index do |item, row_index| %>
         <div class=" flex justify-between px-6 py-4 text-gray-800 border-b border-slate-200 hover:bg-slate-50 transition-colors duration-150 <%= 'bg-gray-25' if row_index.even? %>">
           <% @columns.each_with_index do |col, index| %>
             <div class="flex flex-1 items-center px-4 py-2">

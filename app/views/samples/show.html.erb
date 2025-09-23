@@ -1,14 +1,47 @@
 <%= render Templates::DetailTemplateComponent.new(
-  model: @sample,
+  title: @sample.name,
   breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},
       {label: @sample.name, path: project_samples_path(@project)}
     ],
-  action_buttons: [
-    Library::ButtonComponent.new(label: "Edit", path: edit_project_sample_path(@project, @sample), variant: :secondary),
-    Library::ButtonComponent.new(label: "Delete", path: project_sample_path(@project, @sample), variant: :danger, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" })
+  attributes: [
+    {
+      label: "Name",
+      value: @sample.name,
+    },
+    {
+      label: "ID",
+      value: @sample.id
+    },
+    {
+      label: "Description", 
+      value: @sample.description
+    }, 
+    {
+      label: "Status/Type",
+      value: @sample.sample_type
+    }, 
+    {
+      label: "Image",
+      value: @sample.photo
+    }
   ],
-  show_picture: true
+  actions: [
+    {
+      label: "Edit",
+      path: edit_project_sample_path(@project, @sample),
+      variant: :secondary,
+    },
+    {
+      label: "Delete",
+      path: project_sample_path(@project, @sample),
+      variant: :danger,
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      }
+    }
+  ],
 ) %>

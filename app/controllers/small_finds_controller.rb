@@ -31,9 +31,9 @@ class SmallFindsController < ApplicationController
 
   def update
     @project = Project.find(params[:project_id])
-    @small_find = @project.small_finds.find(small_find_params)
-    if @small_find.update
-      redirect_to project_sample_path(@project, @small_find), notice: "Small Find updated!"
+    @small_find = @project.small_finds.find(params[:id])
+    if @small_find.update(small_find_params)
+      redirect_to project_small_find_path(@project, @small_find), notice: "Small Find updated!"
     else
       render :edit
     end
