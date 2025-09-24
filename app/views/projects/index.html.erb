@@ -3,14 +3,10 @@
     {label: "Projects", path: projects_path}
     ],
   title: "Projects",
-  action_button: Library::ButtonComponent.new(
-        label: "Create Project", 
-        path: new_project_path,
-        variant: :primary
-      ),
-  resource: @projects,
-  pagy: @pagy,
-  columns: [ 
+  table: {
+    items: @projects, 
+    pagy: @pagy,
+    columns: [ 
     {
       label: "ID", 
       accessor: :id, 
@@ -18,12 +14,8 @@
     {
       label: "Name", 
       accessor: :name,
-    },
-    {
-      label: "Actions", 
-      custom_render: true
     }
-  ], 
+  ],
   actions: [
     {
       label: "View", 
@@ -41,4 +33,5 @@
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
   ]
+  }
 )%>
