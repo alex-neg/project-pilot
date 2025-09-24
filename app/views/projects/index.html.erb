@@ -15,8 +15,8 @@
       label: "Name", 
       accessor: :name,
     }
-  ],
-  actions: [
+    ],
+    actions: [
     {
       label: "View", 
       path_proc: ->(project) {project_path(project)},
@@ -32,6 +32,6 @@
       variant: :link_danger,
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
-  ]
+    ]
   }
 )%>
