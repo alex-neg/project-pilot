@@ -39,3 +39,4 @@
 /node_modules
 
 app/components/templates/test.html.erb
+app/components/views/projects/test.html.erb

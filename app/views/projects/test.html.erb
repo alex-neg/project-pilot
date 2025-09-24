@@ -1,0 +1,26 @@
+<%# 
+    Needed interface
+
+    breadcrumbs: [...]
+    header: "Projects",
+    table: {
+        items: @projects,
+        pagy: @pagy,
+        columns: [
+          {
+            label: 'ID',
+            accessor: :id
+          },
+          {
+            label: 'Name',
+            accessor: :name
+          }
+        ],
+        actions: [
+          {
+            label: "View",
+            path_proc: proc { |project| project_path(project) }
+          }
+        ]
+      },   
+ %>
