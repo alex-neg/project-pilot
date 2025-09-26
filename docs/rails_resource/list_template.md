@@ -19,3 +19,5 @@ the initialize method
 ## index.html.erb
 this is the caller view file. the file which invokes the view component.
 The render method calls the component class
+
+<!-- continue -->
