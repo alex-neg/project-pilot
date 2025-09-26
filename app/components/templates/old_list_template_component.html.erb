@@ -68,3 +68,36 @@
   </div>
 </section>
 
+<%# ----------------------- %>
+<section class="p-6">
+  <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
+    <h2 class="text-lg font-semibold text-gray-800"><%= @title %></h2>
+    <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+  </div>
+  <%# wrapper %>
+  <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
+    <%#  %>
+    
+    <div class="overflow-hidden bg-white rounded-xl border border-gray-200">
+      <%# Header %>
+      <div class="flex px-6 py-4 font-semibold text-gray-700 bg-white border-b border-gray-300">
+        
+
+        <% @table[:columns].each do |col| %>
+            <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= col[:label] %> </div>
+        <% end %>
+        <h2>Actions</h2>
+        <% @table[:actions].each do |act| %>
+            <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= act[:label] %> </div>
+        <% end %>
+      </div>
+
+      <%# Rows %>
+      
+      <%# Pagy %>
+    </div>
+  </div>
+  <div class="flex justify-center py-4">
+    <%== helpers.pagy_nav(@pagy) if @pagy.present? %>
+  </div>
+</section>

@@ -11,14 +11,44 @@
       <%# Header %>
       <div class="flex px-6 py-4 font-semibold text-gray-700 bg-white border-b border-gray-300">
         
+        <table class="min-w-full divide-y divide-gray-200 table-auto">
+          <thead class="bg-green-50">
+            <tr  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <% @table[:columns].each do |col| %>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  <%= col[:label] %>
+                </th>
+              <% end %>
+              <% if @table[:actions].present? %>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Actions
+                </th>
+              <% end %>
+            </tr>
+            
+          </thead>
+          <tbody>
+              <% @table[:items].each do |item| %>
+                <tr>
+                  <% @table[:columns].each do |col| %>
+                    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                      <%= item.send(col[:accessor]) %>
+                    </td>
+                  <% end %>
 
-        <% @table[:columns].each do |col| %>
-            <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= col[:label] %> </div>
-        <% end %>
-        <h2>Actions</h2>
-        <% @table[:actions].each do |act| %>
-            <div class="flex-1 pl-4 text-xs tracking-wide uppercase"> <%= act[:label] %> </div>
-        <% end %>
+                  <% if @table[:actions].present? %>
+                    <td class="px-6 py-4 space-x-2 text-sm text-gray-700 whitespace-nowrap">
+                      <% @table[:actions].each do |action| %>
+                        <% path = action[:path_proc].call(item) %>
+                        <%= link_to action[:label], path, data: action[:data] %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+        
       </div>
 
       <%# Rows %>
