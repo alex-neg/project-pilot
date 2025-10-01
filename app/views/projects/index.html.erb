@@ -19,16 +19,16 @@
     actions: [
     {
       label: "View", 
-      path_proc: ->(project) {project_path(project)},
+      path_proc: ->(args) {project_path(args[:item])},
     
     }, 
     {
       label: "Edit", 
-      path_proc: ->(project) {edit_project_path(project)},
+      path_proc: ->(args) {edit_project_path(args[:item])},
     }, 
     {
       label: "Delete", 
-      path_proc: ->(project) {project_path(project)},
+      path_proc: ->(args) {project_path(args[:item])},
       variant: :link_danger,
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }

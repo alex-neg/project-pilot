@@ -39,7 +39,7 @@
                   <% if @table[:actions].present? %>
                     <td class="px-6 py-4 space-x-2 text-sm text-gray-700 whitespace-nowrap">
                       <% @table[:actions].each do |action| %>
-                        <% path = action[:path_proc].call(item) %>
+                        <% path = action[:path_proc].call(item: item) %>
                         <%= link_to action[:label], path, data: action[:data] %>
                       <% end %>
                     </td>
