@@ -32,7 +32,12 @@
                 <tr>
                   <% @table[:columns].each do |col| %>
                     <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
-                      <%= item.send(col[:accessor]) %>
+                      <% value = item.send(col[:accessor]) %>
+                      <% if col[:accessor] == :photo && value.attached? %>
+                        <%= image_tag value, class: "h-12 w-auto rounded" %>
+                      <% else %>
+                        <%= value %>
+                      <% end %>
                     </td>
                   <% end %>
 

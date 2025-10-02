@@ -4,54 +4,59 @@
       {label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)}
     ],
-    title: "Samples", 
-    action_button: Library::ButtonComponent.new(
-        label: "Create Sample", 
-        path: new_project_sample_path(@project, @sample),
-        variant: :primary
-      ),
-    resource: @samples,
+    header: {
+      items: @project,
+      title: "Samples",
+      actions: [
+        component_proc: ->(project) {
+            Library::ButtonComponent.new(
+              label: "Create Site",
+              path: new_project_site_path(project),
+              variant: :primary
+            )
+          }
+      ]
+  },
+  table: {
+    items: @samples, 
     pagy: @pagy,
     columns: [ 
-    {
-      label: "ID", 
-      accessor: :id, 
-    }, 
-    {
-      label: "Name", 
-      accessor: :name,
-    },
-    {
-      label: "Description", 
-      accessor: :description,
-    },
-    {
-      label: "Type", 
-      accessor: :sample_type,
-    },
-    {
-      label: "Photo", 
-      show_picture: true
-    },
-    {
-      label: "Actions", 
-      custom_render: true
-    }
-  ],
-  actions: [
-    {
-      label: "View", 
-      path_proc: ->(project, sample) {project_sample_path(project, sample)}
-    }, 
-    {
-      label: "Edit", 
-      path_proc: ->(project, sample) {edit_project_sample_path(project, sample)}
-    }, 
-    {
-      label: "Delete", 
-      path_proc: ->(project, sample) {project_sample_path(project, sample)},
-      variant: :link_danger,
-      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-    }
-  ]
+      {
+        label: "ID", 
+        accessor: :id, 
+      }, 
+      {
+        label: "Name", 
+        accessor: :name,
+      }, 
+      {
+        label: "Description", 
+        accessor: :description
+      },
+      {
+        label: "Type",
+        accessor: :sample_type
+      },
+      {
+        label: "Photo", 
+        accessor: :photo
+      },
+    ],
+    actions: [
+      {
+        label: "View",
+        path_proc: ->(sample) {project_sample_path(sample.project_id, sample)}
+      }, 
+      {
+        label: "Edit",
+        path_proc: ->(sample) {edit_project_sample_path(sample.project_id, sample)}
+      }, 
+      {
+        label: "Delete",
+        path_proc: ->(sample) {project_sample_path(sample.project_id, sample)},
+        variant: :link_danger,
+        data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+      }
+    ]
+  } 
 )%>
