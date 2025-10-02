@@ -4,12 +4,19 @@
       { label: @project.name, path: project_path(@project)},
       {label: "Sites", path: project_sites_path(@project)}
     ],
-    title: "Sites", 
-    # action_button: Library::ButtonComponent.new(
-    #     label: "Create Site", 
-    #     path: new_project_site_path(@project, @site),
-    #     variant: :primary
-    #   ), 
+    header: {
+      items: @project,
+      title: "Projects",
+      actions: [
+        component_proc: ->(project) {
+            Library::ButtonComponent.new(
+              label: "Create Site",
+              path: new_project_site_path(project),
+              variant: :primary
+            )
+          }
+      ]
+  },
   table: {
     items: @sites, 
     pagy: @pagy,
@@ -29,16 +36,16 @@
     ],
     actions: [
     {
-      label: "View", 
-      path_proc: ->(args) {project_site_path(args[:item].project_id, args[:item])}
+      label: "View",
+      path_proc: ->(site) {project_site_path(site.project_id, site)}
     }, 
     {
-      label: "Edit", 
-      path_proc: ->(args) {edit_project_site_path(args[:item].project_id, args[:item])}
+      label: "Edit",
+      path_proc: ->(site) {edit_project_site_path(site.project_id, site)}
     }, 
     {
-      label: "Delete", 
-      path_proc: ->(args) {project_site_path(args[:item].project_id, args[:item])},
+      label: "Delete",
+      path_proc: ->(site) {project_site_path(site.project_id, site)},
       variant: :link_danger,
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }

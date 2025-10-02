@@ -1,7 +1,7 @@
 class Templates::ListTemplateComponent < ApplicationComponent
-  def initialize(breadcrumb:, title:, table:)
+  def initialize(breadcrumb:, header:, table:)
     @breadcrumb = breadcrumb
-    @title = title
+    @header = header
     @table = table
   end
 end

@@ -2,7 +2,21 @@
   breadcrumb: [
     {label: "Projects", path: projects_path}
     ],
-  title: "Projects",
+  header: {
+    items: @projects,
+    title: "Projects",
+    actions: [
+      {
+        component_proc: ->(project) {
+            Library::ButtonComponent.new(
+              label: "Create Site",
+              path: new_project_path(project),
+              variant: :primary
+            )
+          }
+      }
+    ]
+  },
   table: {
     items: @projects, 
     pagy: @pagy,
@@ -18,17 +32,17 @@
     ],
     actions: [
     {
-      label: "View", 
-      path_proc: ->(args) {project_path(args[:item])},
+      label: "View",
+      path_proc: ->(project) {project_path(project)},
     
+    },
+    {
+      label: "Edit",
+      path_proc: ->(project) {edit_project_path(project)},
     }, 
     {
-      label: "Edit", 
-      path_proc: ->(args) {edit_project_path(args[:item])},
-    }, 
-    {
-      label: "Delete", 
-      path_proc: ->(args) {project_path(args[:item])},
+      label: "Delete",
+      path_proc: ->(project) {project_path(project)},
       variant: :link_danger,
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
