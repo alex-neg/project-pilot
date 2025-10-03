@@ -23,54 +23,6 @@
         }
       ]
     },
-  # columns: [ 
-  #   {
-  #     label: "ID", 
-  #     accessor: :id, 
-  #   }, 
-  #   {
-  #     label: "Name", 
-  #     accessor: :name,
-  #   },
-  #   {
-  #     label: "Description", 
-  #     accessor: :description,
-  #   },
-  #   {
-  #     label: "Type", 
-  #     accessor: :find_type,
-  #   },
-  #   {
-  #     label: "Photo before", 
-  #     show_picture: true,
-  #     picture_accessor: :before_photo
-  #   },
-  #   {
-  #     label: "Photo after", 
-  #     show_picture: true,
-  #     picture_accessor: :after_photo
-  #   },
-  #   {
-  #     label: "Actions", 
-  #     custom_render: true
-  #   }
-  # ],
-  # actions: [
-  #   {
-  #     label: "View", 
-  #     path_proc: ->(project, small_find) {project_small_find_path(project, small_find)}
-  #   }, 
-  #   {
-  #     label: "Edit", 
-  #     path_proc: ->(project, small_find) {edit_project_small_find_path(project, small_find)}
-  #   }, 
-  #   {
-  #     label: "Delete", 
-  #     path_proc: ->(project, small_find) {project_small_find_path(project, small_find)},
-  #     variant: :link_danger,
-  #     data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-  #   }
-  # ],
   table: {
     items: @small_finds, 
     pagy: @pagy,
