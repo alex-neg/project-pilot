@@ -8,13 +8,11 @@
       items: @project,
       title: "Samples",
       actions: [
-        component_proc: ->(project) {
-            Library::ButtonComponent.new(
-              label: "Create Site",
-              path: new_project_site_path(project),
-              variant: :primary
-            )
-          }
+        {
+          label: "Create Sample", 
+          path: new_project_sample_path,
+          variant: :primary
+        }
       ]
   },
   table: {

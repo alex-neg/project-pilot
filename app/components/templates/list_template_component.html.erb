@@ -1,7 +1,13 @@
 <section class="p-6">
   <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
     <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
-    <%= render @header[:actions][0][:component_proc].call(@header[:items]) %>
+    <% @header[:actions].each do |action| %>
+      <%= render Library::ButtonComponent.new(
+        label: action[:label],
+        path: action[:path],
+        variant: action[:variant]
+      ) %>
+    <% end %>
   </div>
   <%# wrapper %>
   <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
@@ -33,8 +39,8 @@
                   <% @table[:columns].each do |col| %>
                     <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
                       <% value = item.send(col[:accessor]) %>
-                      <% if col[:accessor] == :photo && value.attached? %>
-                        <%= image_tag value, class: "h-12 w-auto rounded" %>
+                      <% if col[:accessor] == :photo || col[:accessor] == :before_photo || col[:accessor] === :after_photo %>
+                        <%= value.attached? ? image_tag(value, class: "h-12 w-auto rounded") : content_tag(:em, "No image") %>
                       <% else %>
                         <%= value %>
                       <% end %>

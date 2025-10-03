@@ -4,16 +4,12 @@
     ],
   header: {
     items: @projects,
-    title: "Projects",
+    title: "Projects", 
     actions: [
       {
-        component_proc: ->(project) {
-            Library::ButtonComponent.new(
-              label: "Create Site",
-              path: new_project_path(project),
-              variant: :primary
-            )
-          }
+        label: "Create Project", 
+        path: new_project_path,
+        variant: :primary
       }
     ]
   },
