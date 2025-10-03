@@ -2,15 +2,21 @@
   breadcrumb: [
     {label: "Projects", path: projects_path}
     ],
-  title: "Projects",
-  action_button: Library::ButtonComponent.new(
+  header: {
+    items: @projects,
+    title: "Projects", 
+    actions: [
+      {
         label: "Create Project", 
         path: new_project_path,
         variant: :primary
-      ),
-  resource: @projects,
-  pagy: @pagy,
-  columns: [ 
+      }
+    ]
+  },
+  table: {
+    items: @projects, 
+    pagy: @pagy,
+    columns: [ 
     {
       label: "ID", 
       accessor: :id, 
@@ -18,27 +24,24 @@
     {
       label: "Name", 
       accessor: :name,
-    },
-    {
-      label: "Actions", 
-      custom_render: true
     }
-  ], 
-  actions: [
+    ],
+    actions: [
     {
-      label: "View", 
+      label: "View",
       path_proc: ->(project) {project_path(project)},
     
-    }, 
+    },
     {
-      label: "Edit", 
+      label: "Edit",
       path_proc: ->(project) {edit_project_path(project)},
     }, 
     {
-      label: "Delete", 
+      label: "Delete",
       path_proc: ->(project) {project_path(project)},
       variant: :link_danger,
       data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
     }
-  ]
+    ]
+  }
 )%>

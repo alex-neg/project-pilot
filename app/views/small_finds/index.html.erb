@@ -4,60 +4,61 @@
       {label: @project.name, path: project_path(@project)},
       {label: "Small Finds", path: project_small_finds_path(@project)}
     ],
-    title: "Small Finds",
-    action_button: Library::ButtonComponent.new(
-        label: "Add Small Find", 
-        path: new_project_small_find_path(@project, @small_find),
-        variant: :primary
-      ),
-      resource: @small_finds,
-      pagy: @pagy,
-      columns: [ 
-    {
-      label: "ID", 
-      accessor: :id, 
-    }, 
-    {
-      label: "Name", 
-      accessor: :name,
+    header: {
+      items: @project,
+      title: "Small Finds",
+      actions: [
+        {
+          label: "Create Small Finds", 
+          path: new_project_small_find_path,
+          variant: :primary
+        }
+      ]
     },
-    {
-      label: "Description", 
-      accessor: :description,
-    },
-    {
-      label: "Type", 
-      accessor: :find_type,
-    },
-    {
-      label: "Photo before", 
-      show_picture: true,
-      picture_accessor: :before_photo
-    },
-    {
-      label: "Photo after", 
-      show_picture: true,
-      picture_accessor: :after_photo
-    },
-    {
-      label: "Actions", 
-      custom_render: true
-    }
-  ],
-  actions: [
-    {
-      label: "View", 
-      path_proc: ->(project, small_find) {project_small_find_path(project, small_find)}
-    }, 
-    {
-      label: "Edit", 
-      path_proc: ->(project, small_find) {edit_project_small_find_path(project, small_find)}
-    }, 
-    {
-      label: "Delete", 
-      path_proc: ->(project, small_find) {project_small_find_path(project, small_find)},
-      variant: :link_danger,
-      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-    }
-  ]
+  table: {
+    items: @small_finds, 
+    pagy: @pagy,
+    columns: [ 
+      {
+        label: "ID", 
+        accessor: :id, 
+      }, 
+      {
+        label: "Name", 
+        accessor: :name,
+      }, 
+      {
+        label: "Description", 
+        accessor: :description
+      },
+      {
+        label: "Type",
+        accessor: :find_type
+      },
+      {
+        label: "Photo Before", 
+        accessor: :before_photo
+      },
+            {
+        label: "Photo After", 
+        accessor: :after_photo
+      },
+    ],
+    actions: [
+      {
+        label: "View",
+        path_proc: ->(small_find) {project_small_find_path(small_find.project_id, small_find)}
+      }, 
+      {
+        label: "Edit",
+        path_proc: ->(small_find) {edit_project_small_find_path(small_find.project_id, small_find)}
+      }, 
+      {
+        label: "Delete",
+        path_proc: ->(small_find) {project_small_find_path(small_find.project_id, small_find)},
+        variant: :link_danger,
+        data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+      }
+    ]
+  } 
 ) %>

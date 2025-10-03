@@ -109,7 +109,7 @@ end
         def initialize(initial_balance)
             @balance = initial_balance
         end
-
+        private
         def deposit(amount)
             @balance += amount
             puts "#{amount} added. New balance is: $#{@balance}"

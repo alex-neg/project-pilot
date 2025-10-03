@@ -1,5 +1,5 @@
 class Library::ButtonComponent < ApplicationComponent
-  def initialize(label:, path:, method: nil, data: {}, variant: :primary)
+  def initialize(label:, path:, data: {}, variant: :primary)
     @label = label
     @path = path
     @data = data
