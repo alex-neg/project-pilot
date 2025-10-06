@@ -1,9 +1,8 @@
 SimpleForm.setup do |config|
   config.wrappers :default, class: "mb-4", # margin bottom for spacing between fields
-    hint_class: "text-gray-500 text-sm", 
+    hint_class: "text-gray-500 text-sm",
     error_class: "border-red-500", # adds red border on error to input wrapper
     valid_class: "border-green-500" do |b|
-
     b.use :html5
     b.use :placeholder
 
@@ -27,9 +26,12 @@ SimpleForm.setup do |config|
 
   config.default_wrapper = :default
   config.boolean_style = :nested
-  config.button_class = 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded transition'
+  config.button_class = "bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded transition"
   config.error_notification_tag = :div
-  config.error_notification_class = 'mb-4 p-3 bg-red-100 text-red-700 rounded'
+  config.error_notification_class = "mb-4 p-3 bg-red-100 text-red-700 rounded"
   config.browser_validations = false
-  config.boolean_label_class = 'inline-flex items-center space-x-2'
+  config.boolean_label_class = "inline-flex items-center space-x-2"
+
+  config.input_class = "mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+  config.label_class = "block text-sm font-medium text-gray-700"
 end

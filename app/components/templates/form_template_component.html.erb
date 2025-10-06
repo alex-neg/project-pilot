@@ -1,49 +1,31 @@
 <section class="flex flex-col justify-center items-center p-6 min-h-screen">
   <div class="flex flex-col justify-center items-center p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 min-h-96 w-5xl wrapper">
     <div class="flex justify-between items-center mb-6 w-full max-w-4xl">
-      <h2 class="text-lg font-semibold text-gray-800"><%= title %></h2>
+      <h2 class="text-lg font-semibold text-gray-800"><%= @header[:title] %></h2>
       <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
-      <%= simple_form_for(@parent ? [@parent, @model] : @model, html: { class: "space-y-4", local: true }) do |f| %>
-        <% fields.each do |field_name| %>
-            <% if [:photo, :before_photo, :after_photo].include?(field_name) %>
-              <div class="mb-4">
-                <%= f.input field_name, as: :file,
-                  label_html: {class: "block text-sm font-medium text-gray-700"},
-                  input_html: {class: "mt-1 block w-full text-gray-900"}
-                %>
-              </div>
-            <% elsif field_name == :sample_type %>
-              <div class="mb-4">
-                <%= f.input :sample_type, as: :select, collection: Sample.sample_types.keys,
-                include_blank: false,
-                label_html: {class: "block text-sm font-medium text-gray-700"},
-                input_html: {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
-                %>
-              </div>
-            <% elsif field_name == :find_type %>
-              <div class="mb-4">
-                <%= f.input :find_type, as: :select, collection: SmallFind.find_types.keys,
-                include_blank: false,
-                label_html: {class: "block text-sm font-medium text-gray-700"},
-                input_html: {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
-                %>
-              </div>
-            <% else %>
-              <div class="mb-4">
-                <%= f.input field_name,
-                  label_html: {class: "block text-sm font-medium text-gray-700"},
-                  input_html: {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
-                %>
-              </div>
+
+      <%= simple_form_for(form[:parent] ? [form[:parent], form[:items]] : form[:items]) do |f| %>
+        <% form[:inputs].each do |input| %>
+          <% field_name = input[:accessor] %>
+          <div class="mb-4">
+            <% case field_name %>
+              <% when :photo, :before_photo, :after_photo %>
+                <%= f.input field_name, as: :file %>
+              <% when :sample_type %>
+                <%= f.input :sample_type, as: :select, collection: Sample.sample_types.keys, include_blank: false %>
+              <% when :find_type %>
+                <%= f.input :find_type, as: :select, collection: SmallFind.find_types.keys, include_blank: false %>
+              <% else %>
+                <%= f.input field_name %>
             <% end %>
+          </div>
         <% end %>
-        <div class="flex gap-6 items-center">
-          <%= f.button :submit, "Update", class: "px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/6 hover:bg-indigo-500" %>
-        </div>
+        <%= f.button :submit, form[:submit_label] || "Submit" %>
       <% end %>
+      
     </div>
   </div>
 </section>

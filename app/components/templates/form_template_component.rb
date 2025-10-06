@@ -1,13 +1,9 @@
 class Templates::FormTemplateComponent < ApplicationComponent
-  def initialize(model:, breadcrumb:, title:, actions: [], fields: [], show_picture: false, parent: nil)
-    @model = model
+  def initialize(breadcrumb:, header:, form:)
     @breadcrumb = breadcrumb
-    @title = title
-    @actions = actions
-    @fields = fields.map(&:to_sym)
-    @show_picture = show_picture
-    @parent = parent
+    @header = header
+    @form = form
   end
 
-  attr_reader :model, :title, :actions, :fields, :show_picture, :parent
+  attr_reader :breadcrumb, :header, :form
 end

@@ -3,13 +3,20 @@
       {label: "Projects", path: projects_path},
       {label: "New"}
     ],
-  model: @project,
-  title: "New Project",
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(_) {projects_path}
-    }
-  ], 
-  fields: [:name]
+  header: {
+    items: @projects,
+    title: "Create New Project",
+  },
+  form: {
+    items: Project.new,
+    # parent: nil,
+    pagy: @pagy,
+    submit_label: "Create",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      }
+    ],
+  }
 ) %>
