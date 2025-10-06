@@ -6,7 +6,6 @@
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
-
       <%= simple_form_for(form[:parent] ? [form[:parent], form[:items]] : form[:items]) do |f| %>
         <% form[:inputs].each do |input| %>
           <% field_name = input[:accessor] %>
@@ -25,7 +24,6 @@
         <% end %>
         <%= f.button :submit, form[:submit_label] || "Submit" %>
       <% end %>
-      
     </div>
   </div>
 </section>
