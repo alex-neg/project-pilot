@@ -1,3 +1,4 @@
+
 <%= render Templates::FormTemplateComponent.new(
   breadcrumb: [
       {label: "Projects", path: projects_path},
@@ -10,7 +11,7 @@
   },
   form: {
     items: Site.new,
-    parent: @project,
+    url: project_sites_path,
     pagy: @pagy,
     submit_label: "Create",
     inputs: [
