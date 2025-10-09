@@ -15,11 +15,11 @@ class SitesController < ApplicationController
   end
 
   def create
-    #binding.pry
+    # binding.pry
     @project = Project.find(params[:project_id])
     @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to project_sites_path(@project), notice: "Site created!"
+      redirect_to project_site_path(@project, @site), notice: "Site created!"
     else
       render :new
     end
