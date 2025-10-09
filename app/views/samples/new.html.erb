@@ -24,8 +24,9 @@
       },
       {
         label: "Type",
-        type: :select,
+        input_type: :select,
         accessor: :sample_type,
+        collection: Sample.sample_types.keys.map { |key| [key.titleize, key] }
       },
       {
         label: "Image",

@@ -23,7 +23,7 @@ class SmallFindsController < ApplicationController
     @project = Project.find(params[:project_id])
     @small_find = @project.small_finds.new(small_find_params)
     if @small_find.save
-      redirect_to project_sample_path(@project, @small_find), notice: "Small Find created!"
+      redirect_to project_small_find_path(@project, @small_find), notice: "Small Find created!"
     else
       render :new
     end
