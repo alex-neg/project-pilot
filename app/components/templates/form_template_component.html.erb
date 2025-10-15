@@ -6,7 +6,7 @@
     </div>
     <%# WIP: h-[450px] ?? %>
     <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
-      <%= simple_form_for(form[:record], url: form[:url]) do |f| %>
+      <%= simple_form_for(form[:record], url: form[:url] ) do |f| %>
         <% form[:inputs].each do |input| %>
           <% field_name = input[:accessor] %>
           <% input_type = input[:input_type] %>

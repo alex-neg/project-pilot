@@ -1,18 +1,24 @@
 <%=render Templates::FormTemplateComponent.new(
-  parent: @project,
-  model: @site,
   breadcrumb: [
       {label: "Projects", path: projects_path},
-      { label: @project.name, path: project_path(@project)},
+      {label: @project.name, path: project_path(@project)},
       {label: "Sites", path: project_sites_path(@project)},
       {label: "Edit"}
     ],
-  title: "Edit Site", 
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(project) {project_sites_path(project)}
-    }
-  ], 
-  fields: [:name]
+  header: {
+    title: "Edit Site",
+  },
+  form: {
+    record: @site,
+    url: project_site_path,
+    method: :patch,
+    pagy: @pagy,
+    submit_label: "Update",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      }, 
+    ],
+  }
 )%>

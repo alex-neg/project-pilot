@@ -1,19 +1,37 @@
 <%=render Templates::FormTemplateComponent.new(
-  parent: @project,
-  model: @sample,
   breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},
       {label: "Edit"}
     ],
-  title: "Edit Sample", 
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(project) {project_samples_path(project)}
-    }
-  ], 
-  fields: [:name, :description, :sample_type, :photo],
-  show_picture: true
+  header: {
+    title: "Edit Sample",
+  },
+  form: {
+    record: @sample,
+    url: project_sample_path,
+    pagy: @pagy,
+    submit_label: "Update",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      },
+      {
+        label: "Description",
+        accessor: :description
+      },
+      {
+        label: "Type",
+        input_type: :select,
+        accessor: :sample_type,
+        collection: Sample.sample_types.keys.map { |key| [key.titleize, key] }
+      },
+      {
+        label: "Image",
+        accessor: :photo
+      }
+    ],
+  }
 )%>

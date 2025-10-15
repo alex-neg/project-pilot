@@ -34,7 +34,7 @@ class SitesController < ApplicationController
     @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
     if @site.update(site_params)
-      redirect_to project_sites_path(@project), notice: "Site updated!"
+      redirect_to project_site_path(@project), notice: "Site updated!"
     else
       render :edit
     end
