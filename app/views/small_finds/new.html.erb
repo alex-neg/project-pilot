@@ -11,7 +11,6 @@
     form: {
       record: SmallFind.new,
       url: project_small_finds_path,
-      pagy: @pagy,
       submit_label: "Create",
       inputs: [
         {
@@ -24,7 +23,7 @@
         },
         {
           label: "Type",
-          input_type: :select,
+          type: :select,
           accessor: :find_type,
           collection: SmallFind.find_types.keys.map { |key| [key.titleize, key] }
         },

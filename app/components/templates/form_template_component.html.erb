@@ -9,7 +9,7 @@
       <%= simple_form_for(form[:record], url: form[:url] ) do |f| %>
         <% form[:inputs].each do |input| %>
           <% field_name = input[:accessor] %>
-          <% input_type = input[:input_type] %>
+          <% input_type = input[:type] %>
           <div class="mb-4">
             <% if input[:collection].present? %>
               <%= f.input field_name, as: input_type, collection: input[:collection], label: input[:label] %>

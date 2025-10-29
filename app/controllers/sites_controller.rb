@@ -15,7 +15,6 @@ class SitesController < ApplicationController
   end
 
   def create
-    # binding.pry
     @project = Project.find(params[:project_id])
     @site = @project.sites.new(site_params)
     if @site.save
