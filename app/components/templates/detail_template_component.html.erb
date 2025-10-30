@@ -30,9 +30,14 @@
                   <%= "" %>
                 <% elsif item[:variant].present? %>
                   <p class="text-lg text-gray-700"><%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %></p>
-                <% elsif item[:label].to_s.downcase.start_with?("image") && item[:value].present? %>
-                  <p class="text-lg text-gray-700"><%= item[:label] %>:</p>
-                  <%= image_tag item[:value], alt: item[:label], class: "w-96 h-auto rounded shadow" %>
+                <% elsif item[:label].to_s.downcase.start_with?("image") %>
+                   <% if item[:value].present? %>
+                      <p class="text-lg text-gray-700"><%= item[:label] %>:</p>
+                      <%= image_tag item[:value], alt: item[:label], class: "w-96 h-auto rounded shadow" %>
+                    <% else %>
+                      <p class="text-lg text-gray-700"><%= item[:label] %>:</p>
+                      <p class="text-gray-500 italic">No image available</p>
+                    <% end %>
                 <% else %>
                   <p class="text-lg text-gray-700"><%= item[:label] %>: <%= item[:value] %></p>
                 <% end %>
