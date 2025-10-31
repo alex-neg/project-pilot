@@ -1,19 +1,2 @@
-<%= render Templates::FormTemplateComponent.new(
-  breadcrumb: [
-      {label: "Projects", path: projects_path},
-      {label: "New"}
-    ],
-  header: {
-    title: "Create New Project",
-  },
-  form: {
-    record: Project.new,
-    submit_label: "Create",
-    inputs: [
-      {
-        label: "Name",
-        accessor: :name
-      }
-    ],
-  }
-) %>
+<h1>Projects#new</h1>
+<p>Find me in app/views/projects/new.html.erb</p>

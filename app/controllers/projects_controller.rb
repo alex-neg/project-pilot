@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @pagy, @projects = pagy(Project.all, limit: 5)
+    @projects = Project.all
   end
 
   def show
@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(params[:id])
     if @project.save
       redirect_to @project, notice: "Project created!"
     else
@@ -39,9 +39,7 @@ class ProjectsController < ApplicationController
     redirect_to projects_path, notice: "Project deleted!"
   end
 
-  private
-
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, :status)
   end
 end

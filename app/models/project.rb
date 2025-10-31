@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
+  belongs_to :user
   validates :name, presence: { message: "Name is required" }
   has_many :sites, dependent: :destroy
-  has_many :samples, dependent: :destroy
-  has_many :small_finds, dependent: :destroy
+
+  enum status: { pending: 0, ongoing: 1, completed: 2 }
 end
