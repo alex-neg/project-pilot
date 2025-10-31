@@ -1,0 +1,17 @@
+<nav class="inline-flex items-center py-3 space-x-2 breadcrumbs">
+  <% @breadcrumb.each_with_index do |item, index| %>
+    <% is_last = index == @breadcrumb.length - 1 %>
+    
+    <div class="flex items-center space-x-2">
+      <% if item[:path] && !is_last %>
+        <%= link_to item[:label], item[:path], class: "px-3 py-1 rounded-xl transition hover:bg-indigo-100 hover:text-indigo-700 text-slate-500" %>
+      <% else %>
+        <span class="px-3 py-1 font-semibold bg-indigo-100 rounded-xl text-slate-700 breadcrumb-current"><%= item[:label] %></span>
+      <% end %>
+
+      <% unless is_last %>
+        <span class="text-gray-400">&gt;</span>
+      <% end %>
+    </div>
+  <% end %>
+</nav>

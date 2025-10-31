@@ -1,34 +1,52 @@
-<section class="mx-auto max-w-7xl h-screen">
-    <header class="mb-4 bg-green-50">
-        <div class="flex justify-around mx-auto font-bold text-gray-700 max-ndw-4xl">
-            <div class="flex justify-center items-center w-1/4">
-                Sites
-            </div>
-            <div class="px-4 py-2 w-1/4 text-center">
-            <%= link_to "Create Site", new_project_site_path(@project), class: "inline-block bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500" %>
-            </div>
-        </div>
-    </header>
-
-    
-
-    <%# Projects list header %>
-    <div class="flex font-bold text-gray-700 bg-slate-50">
-        <div class="px-4 py-2 w-1/6">ID</div>
-        <div class="px-4 py-2 w-4/6">Name</div>
-        <div class="px-4 py-2 w-1/6">Actions</div>
-    </div>
-
-    <!-- Rows -->
-    <% @sites.each do |site| %>
-    <div class="flex items-center">
-        <div class="px-4 py-2 w-1/6"><%= site.id %></div>
-        <div class="px-4 py-2 w-4/6"><%= site.name %></div>
-        <div class="px-4 py-2 space-x-2 w-1/6">
-        <%= link_to "View", project_site_path(@project, site), class: "text-blue-600 hover:underline" %>
-        <%= link_to "Edit", edit_project_site_path(@project, site), class: "text-yellow-600 hover:underline" %>
-        <%= link_to "Delete", project_site_path(@project, site), data: { turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "text-red-600 hover:underline" %>
-        </div>
-    </div>
-    <% end %>
-</section>
+<%= render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+      {label: "Projects", path: projects_path},
+      { label: @project.name, path: project_path(@project)},
+      {label: "Sites", path: project_sites_path(@project)}
+    ],
+    header: {
+      items: @project,
+      title: "Projects",
+      actions: [
+        {
+          label: "Create Site", 
+          path: new_project_site_path,
+          variant: :primary
+        }
+      ]
+  },
+  table: {
+    items: @sites, 
+    pagy: @pagy,
+    columns: [ 
+    {
+      label: "ID", 
+      accessor: :id, 
+    }, 
+    {
+      label: "Name", 
+      accessor: :name,
+    }, 
+    {
+      label: "Project ID", 
+      accessor: :project_id
+    }
+    ],
+    actions: [
+    {
+      label: "View",
+      path_proc: ->(site) {project_site_path(site.project_id, site)}
+    }, 
+    {
+      label: "Edit",
+      path_proc: ->(site) {edit_project_site_path(site.project_id, site)}
+    }, 
+    {
+      label: "Delete",
+      path_proc: ->(site) {project_site_path(site.project_id, site)},
+      variant: :link_danger,
+      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+    }
+  ]
+  }
+)%>

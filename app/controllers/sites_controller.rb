@@ -1,7 +1,7 @@
 class SitesController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @sites = @project.sites
+    @pagy, @sites = pagy(@project.sites, limit: 5)
   end
 
   def show
@@ -18,7 +18,7 @@ class SitesController < ApplicationController
     @project = Project.find(params[:project_id])
     @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to project_sites_path(@project), notice: "Site created!"
+      redirect_to project_site_path(@project, @site), notice: "Site created!"
     else
       render :new
     end
@@ -33,7 +33,7 @@ class SitesController < ApplicationController
     @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
     if @site.update(site_params)
-      redirect_to project_sites_path(@project), notice: "Site updated!"
+      redirect_to project_site_path(@project), notice: "Site updated!"
     else
       render :edit
     end

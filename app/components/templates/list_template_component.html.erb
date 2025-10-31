@@ -1,32 +1,73 @@
-<section class="p-4">
-    <div class="flex flex-wrap justify-between items-center px-6 py-4 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800"> <%= @header %> </h2>
-        <div class="px-4 py-2 font-medium text-center text-white bg-indigo-400 rounded-lg border w-1/8 hover:bg-indigo-500">
-            <%= link_to "Create Project", new_project_path %>
-        </div>
+<section class="p-6">
+  <div class="flex flex-wrap justify-between items-center px-4 py-5 mb-8">
+    <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+    <% @header[:actions].each do |action| %>
+      <%= render Library::ButtonComponent.new(
+        label: action[:label],
+        path: action[:path],
+        variant: action[:variant]
+      ) %>
+    <% end %>
+  </div>
+  <%# wrapper %>
+  <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
+    <%#  %>
+    
+    <div class="overflow-hidden bg-white rounded-xl border border-gray-200 min-h-[350px]">
+      <%# Header %>
+      <div class="flex px-6 py-4 font-semibold text-gray-700 bg-white 0">
+        
+        <table class="min-w-full divide-y divide-gray-200 table-auto">
+          <thead class="">
+            <tr  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <% @table[:columns].each do |col| %>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  <%= col[:label] %>
+                </th>
+              <% end %>
+              <% if @table[:actions].present? %>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Actions
+                </th>
+              <% end %>
+            </tr>
+            
+          </thead>
+          <tbody>
+              <% @table[:items].each do |item| %>
+                <tr>
+                  <% @table[:columns].each do |col| %>
+                    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                      <% value = item.send(col[:accessor]) %>
+                      <% if col[:accessor] == :photo || col[:accessor] == :before_photo || col[:accessor] === :after_photo %>
+                        <%= value.attached? ? image_tag(value, class: "h-12 w-auto rounded") : content_tag(:em, "No image") %>
+                      <% else %>
+                        <%= value %>
+                      <% end %>
+                    </td>
+                  <% end %>
+
+                  <% if @table[:actions].present? %>
+                    <td class="px-6 py-4 space-x-2 text-sm text-gray-700 whitespace-nowrap">
+                      <% @table[:actions].each do |action| %>
+                        <% path = action[:path_proc].call(item) %>
+                        <%= link_to action[:label], path, data: action[:data] %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+
+      <%# Rows %>
+      
+      <%# Pagy %>
     </div>
-    <div class="rounded-xl border border-slate-300">  
-        <%# Header %>
-        <div class="flex px-6 py-4 font-bold text-gray-800 rounded-t-xl border-slate-200">      
-            <% @columns.each do |col| %>
-                <div class="pl-4  <%= col[:width] %>"> <%= col[:label] %> </div>
-            <% end %>
-            <div class="pl-8 w-1/6">Actions</div>
-        </div>
-        <%# Rows %>
-        <% @items.each do |item| %>
-            <div class="flex justify-between px-6 py-1 text-gray-800 border-t border-slate-200">
-                <% @columns.each do |col| %>
-                    <div class="px-4 py-2 <%= col[:width] %>">
-                        <%= item.send(col[:accessor]) %>
-                    </div>
-                <%end%>
-                <div class="px-4 py-2 space-x-2 w-1/6">
-                    <% @actions.each do |action| %>
-                        <%= link_to action[:label], action[:path_proc].call(item), action[:html_options] || {} %>
-                    <%end%>
-                </div>
-            </div>
-        <%end%>
-    </div>
- </section>
+  </div>
+  <div class="flex justify-center py-4">
+    <%== helpers.pagy_nav(@table[:pagy]) if @table[:pagy].present? %>
+  </div>
+</section>

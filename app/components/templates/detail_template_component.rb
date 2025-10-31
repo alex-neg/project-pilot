@@ -1,10 +1,10 @@
 class Templates::DetailTemplateComponent < ApplicationComponent
-  def initialize(project:, project_details: [], actions: [], links: [])
-    @project = project
-    @project_details = project_details
+  def initialize(title:, breadcrumb:, attributes: [], actions: [])
+    @title = title
+    @breadcrumb = breadcrumb
+    @attributes = attributes
     @actions = actions
-    @links = links
   end
 
-  attr_reader :project, :project_details, :actions, :links
+  attr_reader :title, :breadcrumb, :attributes, :actions
 end

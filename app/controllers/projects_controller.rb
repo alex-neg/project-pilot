@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @pagy, @projects = pagy(Project.all, limit: 5)
   end
 
   def show
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project, notice: "Project created!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

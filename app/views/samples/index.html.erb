@@ -1,34 +1,60 @@
-<section class="mx-auto max-w-7xl h-screen">
-    <header class="mb-4 bg-green-50">
-        <div class="flex justify-around mx-auto font-bold text-gray-700 max-ndw-4xl">
-            <div class="flex justify-center items-center w-1/4">
-                Samples
-            </div>
-            <div class="px-4 py-2 w-1/4 text-center">
-            <%= link_to "Create Sample", new_project_sample_path(@project), class: "inline-block bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500" %>
-            </div>
-        </div>
-    </header>
-
-    
-
-    <%# Header %>
-    <div class="flex font-bold text-gray-700 bg-slate-50">
-        <div class="px-4 py-2 w-1/6">ID</div>
-        <div class="px-4 py-2 w-4/6">Name</div>
-        <div class="px-4 py-2 w-1/6">Actions</div>
-    </div>
-
-    <!-- Rows -->
-    <% @samples.each do |sample| %>
-    <div class="flex items-center">
-        <div class="px-4 py-2 w-1/6"><%= sample.id %></div>
-        <div class="px-4 py-2 w-4/6"><%= sample.name %></div>
-        <div class="px-4 py-2 space-x-2 w-1/6">
-        <%= link_to "View", project_sample_path(@project, sample), class: "text-blue-600 hover:underline" %>
-        <%= link_to "Edit", edit_project_sample_path(@project, sample), class: "text-yellow-600 hover:underline" %>
-        <%= link_to "Delete", project_sample_path(@project, sample), data: { turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "text-red-600 hover:underline" %>
-        </div>
-    </div>
-    <% end %>
-</section>
+<%= render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+      {label: "Projects", path: projects_path}, 
+      {label: @project.name, path: project_path(@project)},
+      {label: "Samples", path: project_samples_path(@project)}
+    ],
+    header: {
+      items: @project,
+      title: "Samples",
+      actions: [
+        {
+          label: "Create Sample", 
+          path: new_project_sample_path,
+          variant: :primary
+        }
+      ]
+  },
+  table: {
+    items: @samples, 
+    pagy: @pagy,
+    columns: [ 
+      {
+        label: "ID", 
+        accessor: :id, 
+      }, 
+      {
+        label: "Name", 
+        accessor: :name,
+      }, 
+      {
+        label: "Description", 
+        accessor: :description
+      },
+      {
+        label: "Type",
+        accessor: :sample_type
+      },
+      {
+        label: "Photo", 
+        accessor: :photo
+      },
+    ],
+    actions: [
+      {
+        label: "View",
+        path_proc: ->(sample) {project_sample_path(sample.project_id, sample)}
+      }, 
+      {
+        label: "Edit",
+        path_proc: ->(sample) {edit_project_sample_path(sample.project_id, sample)}
+      }, 
+      {
+        label: "Delete",
+        path_proc: ->(sample) {project_sample_path(sample.project_id, sample)},
+        variant: :link_danger,
+        data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+      }
+    ]
+  } 
+)%>

@@ -1,0 +1,25 @@
+<section class="flex flex-col justify-center items-center p-6 min-h-screen">
+  <div class="flex flex-col justify-center items-center p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 min-h-96 w-5xl wrapper">
+    <div class="flex justify-between items-center mb-6 w-full max-w-4xl">
+      <h2 class="text-lg font-semibold text-gray-800"><%= @header[:title] %></h2>
+      <%= render Library::BreadcrumbComponent.new(breadcrumb: @breadcrumb) if @breadcrumb.present? %>
+    </div>
+    <%# WIP: h-[450px] ?? %>
+    <div class="flex flex-col items-center p-6 w-full max-w-3xl rounded-xl border border-gray-200 shadow-sm bg-slate-50">
+      <%= simple_form_for(form[:record], url: form[:url] ) do |f| %>
+        <% form[:inputs].each do |input| %>
+          <% field_name = input[:accessor] %>
+          <% input_type = input[:type] %>
+          <div class="mb-4">
+            <% if input[:collection].present? %>
+              <%= f.input field_name, as: input_type, collection: input[:collection], label: input[:label] %>
+            <% else %>
+            <%= f.input field_name, label: input[:label] %>
+            <% end %>
+          </div>
+        <% end %>
+        <%= f.button :submit, form[:submit_label] || "Submit" %>
+      <% end %>
+    </div>
+  </div>
+</section>
