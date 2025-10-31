@@ -5,14 +5,18 @@
       {label: "Sites", path: project_sites_path(@project)},
       {label: "New"}
     ],
-  parent: @project,
-  model: @site,
-  title: "New Site",
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(_) {projects_path}
-    }
-  ], 
-  fields: [:name]
+  header: {
+    title: "Create New Site",
+  },
+  form: {
+    record: Site.new,
+    url: project_sites_path,
+    submit_label: "Create",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      }, 
+    ],
+  }
 ) %>

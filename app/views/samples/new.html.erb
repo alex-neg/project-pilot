@@ -1,19 +1,36 @@
 <%= render Templates::FormTemplateComponent.new(
-   breadcrumb: [
+  breadcrumb: [
       {label: "Projects", path: projects_path},
       { label: @project.name, path: project_path(@project)},
       {label: "Samples", path: project_samples_path(@project)},
       {label: "New"}
     ],
-  parent: @project,
-  model: @sample,
-  title: "New Sample",
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(_) {projects_path}
-    }
-  ], 
-  fields: [:name, :description, :sample_type, :photo], 
-  show_picture: true
+  header: {
+    title: "Create New Sample",
+  },
+  form: {
+    record: Sample.new,
+    url: project_samples_path,
+    submit_label: "Create",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      },
+      {
+        label: "Description",
+        accessor: :description
+      },
+      {
+        label: "Type",
+        type: :select,
+        accessor: :sample_type,
+        collection: Sample.sample_types.keys.map { |key| [key.titleize, key] }
+      },
+      {
+        label: "Image",
+        accessor: :photo
+      }
+    ],
+  }
 ) %>

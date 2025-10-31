@@ -4,13 +4,17 @@
       { label: @project.name, path: project_path(@project)},
       {label: "Edit"}
     ],
-  model: @project,
-  title: "Edit Project", 
-  actions: [
-    {
-      label: "Back", 
-      path_proc: ->(project) {project_path(project)}
-    }
-  ], 
-  fields: [:name]
+  header: {
+    title: "Edit Project",
+  },
+  form: {
+    record: @project,
+    submit_label: "Update",
+    inputs: [
+      {
+        label: "Name",
+        accessor: :name
+      }
+    ],
+  }
 )%>

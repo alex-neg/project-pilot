@@ -13,12 +13,12 @@
   <div class="p-6 space-y-4 bg-white rounded-2xl border-2 border-gray-200 shadow-sm wrapper min-h-[400px]">
     <%#  %>
     
-    <div class="overflow-hidden bg-white rounded-xl border border-gray-200">
+    <div class="overflow-hidden bg-white rounded-xl border border-gray-200 min-h-[350px]">
       <%# Header %>
-      <div class="flex px-6 py-4 font-semibold text-gray-700 bg-white border-b border-gray-300">
+      <div class="flex px-6 py-4 font-semibold text-gray-700 bg-white 0">
         
         <table class="min-w-full divide-y divide-gray-200 table-auto">
-          <thead class="bg-green-50">
+          <thead class="">
             <tr  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
               <% @table[:columns].each do |col| %>
                 <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -68,6 +68,6 @@
     </div>
   </div>
   <div class="flex justify-center py-4">
-    <%== helpers.pagy_nav(@pagy) if @pagy.present? %>
+    <%== helpers.pagy_nav(@table[:pagy]) if @table[:pagy].present? %>
   </div>
 </section>
