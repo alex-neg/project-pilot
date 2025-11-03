@@ -3,5 +3,5 @@ class Project < ApplicationRecord
   validates :name, presence: { message: "Name is required" }
   has_many :sites, dependent: :destroy
 
-  enum status: { pending: 0, ongoing: 1, completed: 2 }
+  enum :status, { pending: 0, ongoing: 1, completed: 2 }
 end

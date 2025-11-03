@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_13_160446) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_31_181903) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,43 +39,35 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_160446) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "excavation_units", force: :cascade do |t|
     t.string "name"
+    t.integer "site_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["site_id"], name: "index_excavation_units_on_site_id"
   end
 
-  create_table "samples", force: :cascade do |t|
-    t.text "name"
-    t.text "description"
-    t.integer "sample_type"
-    t.integer "project_id", null: false
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_samples_on_project_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "sites", force: :cascade do |t|
     t.string "name"
+    t.integer "status"
     t.integer "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_sites_on_project_id"
   end
 
-  create_table "small_finds", force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.string "name"
-    t.text "description"
-    t.integer "find_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_small_finds_on_project_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "samples", "projects"
+  add_foreign_key "excavation_units", "sites"
+  add_foreign_key "projects", "users"
   add_foreign_key "sites", "projects"
-  add_foreign_key "small_finds", "projects"
 end
