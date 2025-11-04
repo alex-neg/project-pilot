@@ -1,2 +1,42 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<%= render Templates::ListTemplateComponent.new(
+  breadcrumb: [
+    { label: "Users", path: users_path }
+  ],
+  header: {
+    items: @users,
+    title: "Users",
+    actions: [
+      {
+        label: "Create New User",
+        path: new_user_path,
+        variant: :primary
+      }
+    ]
+  },
+  table: {
+    items: @users,
+    pagy: @pagy,
+    columns: [
+      { label: "ID", accessor: :id },
+      { label: "First Name", accessor: :first_name },
+      { label: "Last Name", accessor: :last_name },
+      { label: "Email", accessor: :email }
+    ],
+    actions: [
+      {
+        label: "View",
+        path_proc: ->(user) { user_path(user) }
+      }, 
+      {
+        label: "Edit", 
+        path_proc: ->(user) {edit_user_path(user)}
+      },
+      {
+        label: "Delete",
+        path_proc: ->(user) {user_path(user)},
+        variant: :link_danger,
+        data: {turbo_confirm: "Are you sure?", turbo_method: :delete}
+      }
+    ]
+  }
+) %>

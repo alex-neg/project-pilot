@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :set_user
+
   def index
     @projects = Project.all
   end
@@ -37,6 +39,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path, notice: "Project deleted!"
+  end
+
+  def set_user
+    @user = User.create!(first_name: "Temp", last_name: "User", email: "temp@example.com")
   end
 
   def project_params
