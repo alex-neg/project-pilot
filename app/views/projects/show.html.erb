@@ -1,2 +1,33 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<%=render Templates::DetailTemplateComponent.new(
+    # @title = title
+    # @breadcrumb = breadcrumb
+    # @attributes = attributes
+    # @actions = actions
+
+    title: @project.name,
+    breadcrumb: [
+        {label: "Projects", path: "projects_path"}, 
+        {label: @project.name, path: project_path(@project)}
+    ], 
+    attributes: [
+        {
+            label: "Name", 
+            value: @project.name
+        }, 
+        {
+            label: "Status", 
+            value: @project.status
+        }, 
+        {
+            label: "ID", 
+            value: @project.id
+        }
+    ], 
+    actions: [
+        {
+            label: "Edit"
+            path: edit_project_path(@project)
+        }
+    ]
+
+)%>

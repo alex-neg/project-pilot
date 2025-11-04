@@ -7,12 +7,17 @@
         title: "Crate New Project"
     }, 
     form: {
-        record: Project.new,
+        record: @project,
         submit_label: "Create",
         inputs: [
             {
                 label: "Name", 
                 accessor: :name
+            }, 
+            {
+                label: "Status", 
+                accessor: :status,
+                collection: Project.statuses.keys.map { |status| [status.titleize, status] }
             }
         ]
     }
