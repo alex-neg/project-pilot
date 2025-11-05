@@ -1,5 +1,5 @@
-<%render Templates::DetailTemplateComponent.new(
-    title: @user.first_name,
+<%=render Templates::DetailTemplateComponent.new(
+    title: "#{@user.first_name} #{@user.last_name}",
     breadcrumb: [
         {label: "Users", path: users_path},
         {label: @user.first_name, path: user_path(@user)}
