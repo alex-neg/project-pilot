@@ -1,13 +1,10 @@
 <%=render Templates::DetailTemplateComponent.new(
-    # @title = title
-    # @breadcrumb = breadcrumb
-    # @attributes = attributes
-    # @actions = actions
-
     title: @project.name,
     breadcrumb: [
-        {label: "Projects", path: "projects_path"}, 
-        {label: @project.name, path: project_path(@project)}
+        {label: "Users", path: users_path}, 
+        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
+        {label: "Projects", path: user_projects_path(@project.user)}, 
+        {label: @project.name, path: user_project_path(@project.user, @project)}
     ], 
     attributes: [
         {
@@ -25,8 +22,8 @@
     ], 
     actions: [
         {
-            label: "Edit"
-            path: edit_project_path(@project)
+            label: "Edit",
+            path: edit_user_project_path(@user, @project)
         }
     ]
 
