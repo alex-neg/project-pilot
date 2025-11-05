@@ -1,9 +1,22 @@
 <%render Templates::DetailTemplateComponent.new(
+    title: @user.first_name,
     breadcrumb: [
         {label: "Users", path: users_path},
-        {label: @user.name, path: user_path(@user)}
-    ], 
+        {label: @user.first_name, path: user_path(@user)}
+    ],
     attributes: [
-        {}
+        {label: "ID", value: @user.id},
+        {label: "First Name", value: @user.first_name},
+        {label: "Last Name", value: @user.last_name},
+        {label: "Email", value: @user.email}
+    ],
+    actions: [
+        {label: "Edit", path: edit_user_path(@user)},
+        {
+            label: "Delete",
+            path: user_path(@user),
+            variant: :danger,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        }
     ]
 )%>
