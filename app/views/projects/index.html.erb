@@ -19,7 +19,9 @@
             {label: "Status", accessor: :status}
         ], 
         actions: [
-            {label: "View", path_proc: ->(project) {user_project_path(project.user_id, project)}}
+            {label: "View", path_proc: ->(project) {user_project_path(project.user_id, project)}}, 
+            {label: "Edit", path_proc: ->(project) {edit_user_project_path(project.user_id, project)}}, 
+            {label: "Delete", path_proc: ->(project) {user_project_path(project.user_id, project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
         ]
     }
 )%>

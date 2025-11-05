@@ -8,6 +8,10 @@
     ], 
     attributes: [
         {
+            label: "ID", 
+            value: @project.id
+        },
+        {
             label: "Name", 
             value: @project.name
         }, 
@@ -16,14 +20,22 @@
             value: @project.status
         }, 
         {
-            label: "ID", 
-            value: @project.id
+            label: "Sites", 
+            path: user_project_sites_path(@user, @project), 
+            variant: :link,
+            count: @project.sites.count
         }
     ], 
     actions: [
         {
             label: "Edit",
             path: edit_user_project_path(@user, @project)
+        }, 
+        {
+            label: "Delete",
+            path: user_project_path(@user, @project),
+            variant: :danger,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
         }
     ]
 
