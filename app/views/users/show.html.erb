@@ -8,7 +8,13 @@
         {label: "ID", value: @user.id},
         {label: "First Name", value: @user.first_name},
         {label: "Last Name", value: @user.last_name},
-        {label: "Email", value: @user.email}
+        {label: "Email", value: @user.email},
+        {
+            label: "Project Contributions",
+            path: user_projects_path(@user),
+            variant: :link,
+            count: @user.projects.count
+        },
     ],
     actions: [
         {label: "Edit", path: edit_user_path(@user)},

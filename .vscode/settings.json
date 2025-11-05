@@ -1,15 +1,15 @@
-{
-"files.associations": {
-  "*.html.erb": "erb",
-  "*.erb": "erb"
-},
-"[erb]": {
-  "editor.defaultFormatter": "aki77.html-erb",
-  "editor.formatOnSave": true
-},
-"emmet.includeLanguages": {
-  "erb": "html",
-  "html.erb": "html"
-}
+// {
+// "files.associations": {
+//   "*.html.erb": "erb",
+//   "*.erb": "erb"
+// },
+// "[erb]": {
+//   "editor.defaultFormatter": "aki77.html-erb",
+//   "editor.formatOnSave": true
+// },
+// "emmet.includeLanguages": {
+//   "erb": "html",
+//   "html.erb": "html"
+// }
 
-}
+// }
