@@ -1,2 +1,9 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%render Templates::DetailTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path},
+        {label: @user.name, path: user_path(@user)}
+    ], 
+    attributes: [
+        {}
+    ]
+)%>
