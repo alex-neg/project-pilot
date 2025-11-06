@@ -26,9 +26,14 @@
             {label: "Status", accessor: :status}
         ],
         actions: [
-            {label: "View", path_proc: ->(site) {user_project_site_path(site.project_id, project)}}, 
-            {label: "Edit", path_proc: ->(project) {edit_user_project_site_path(site.project_id, project)}}, 
-            {label: "Delete", path_proc: ->(project) {user_project_site_path(site.project_id, project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
+            {label: "View", path_proc: ->(site) {user_project_site_path(site.project.user_id, site.project_id, site)}},
+            {label: "Edit", path_proc: ->(site) {edit_user_project_site_path(site.project.user_id, site.project_id, site)}},
+            {
+                label: "Delete",
+                path_proc: ->(site) {user_project_site_path(site.project.user_id, site.project_id, site)},
+                variant: :link_danger,
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            }
         ]
     }
 )%>
