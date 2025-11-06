@@ -1,49 +1,55 @@
 class SitesController < ApplicationController
+  before_action :set_user
+  before_action :set_project
+
   def index
-    @project = Project.find(params[:project_id])
-    @sites = @project.sites.all
+    @sites = @project.sites
   end
 
   def show
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
   end
 
   def new
-    @project = Project.find(params[:project_id])
     @site = @project.sites.new
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to project_site_path(@project, @site), notice: "Site created!"
+      redirect_to user_project_site_path(@user, @project, @site), notice: "Site created!"
     else
-      render :new, :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
-    if @site.update
-      redirect_to project_site_path(@project, @site), notice: "Site updated!"
+    if @site.update(site_params)
+      redirect_to user_project_site_path(@user, @project, @site), notice: "Site updated!"
     else
       render :edit
     end
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
     @site.destroy
-    redirect_to project_sites_path(@project), notice: "Site deleted!"
+    redirect_to user_project_sites_path(@user, @project), notice: "Site deleted!"
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_project
+    @project = @user.projects.find(params[:project_id])
   end
 
   def site_params
