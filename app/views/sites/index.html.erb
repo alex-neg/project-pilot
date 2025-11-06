@@ -1,2 +1,34 @@
-<h1>Sites#index</h1>
-<p>Find me in app/views/sites/index.html.erb</p>
+<%=render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path}, 
+        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
+        {label: "Projects", path: user_projects_path(@user)}, 
+        {label: "#{@project.name}", path: user_project_path(@user, @project)},
+        {label: "Sites", path: user_project_sites_path(@user, @project)}
+    ], 
+
+    header: {
+        items: @user,
+        actions: [
+            {
+                label: "New Site",
+                path: new_user_project_site_path(@user, @project),
+                variant: :primary
+            }
+        ]
+    }, 
+    table: {
+        items: @sites, 
+        pagy: @pagy, 
+        columns: [
+            {label: "ID", accessor: :id}, 
+            {label: "Name", accessor: :name}, 
+            {label: "Status", accessor: :status}
+        ],
+        actions: [
+            {label: "View", path_proc: ->(site) {user_project_site_path(site.project_id, project)}}, 
+            {label: "Edit", path_proc: ->(project) {edit_user_project_site_path(site.project_id, project)}}, 
+            {label: "Delete", path_proc: ->(project) {user_project_site_path(site.project_id, project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
+        ]
+    }
+)%>
