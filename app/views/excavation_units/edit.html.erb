@@ -1,2 +1,28 @@
-<h1>ExcavationUnits#edit</h1>
-<p>Find me in app/views/excavation_units/edit.html.erb</p>
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path}, 
+        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
+        {label: "Projects", path: user_projects_path(@user)}, 
+        {label: "#{@project.name}", path: user_project_path(@user, @project)},
+        {label: "Sites", path: user_project_sites_path(@user, @project)},
+        {label: "#{@site.name}", path: user_project_site_path(@user, @project, @site)},
+        {label: "Excavation Units", path: user_project_site_excavation_units_path(@user, @project, @site)},
+        {label: "#{@excavation_unit.name}", path: user_project_site_excavation_unit_path(@user, @project, @site, @excavation_unit)},
+        {label: "Edit"}
+    ],
+    header: {
+        title: "Update Excavation Unit"
+    }, 
+    form: {
+        record: @excavation_unit,
+        url: user_project_site_excavation_unit_path(@user, @project, @site, @excavation_unit),
+        method: :patch,
+        submit_label: "Update",
+        inputs: [
+            {
+                label: "Name", 
+                accessor: :name
+            },
+        ]
+    }
+)%>
