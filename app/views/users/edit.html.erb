@@ -1,2 +1,21 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path},
+        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
+        {label: "Edit"}
+    ], 
+    header: {
+        title: "Update User"
+    },
+    form: {
+        record: @user,
+        url: user_path(@user),
+        method: :patch,
+        submit_label: "Update",
+        inputs: [
+            {label: "First Name", accessor: :first_name},
+            {label: "Last Name", accessor: :last_name},
+            {label: "Email", accessor: :email}
+        ]
+    }
+)%>
