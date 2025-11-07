@@ -1,4 +1,4 @@
-<%render Templates::FormTemplateComponent.new(
+<%=render Templates::FormTemplateComponent.new(
     breadcrumb: [
         {label: "Users", path: users_path}, 
         {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
