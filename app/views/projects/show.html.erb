@@ -3,8 +3,8 @@
     breadcrumb: [
         {label: "Users", path: users_path}, 
         {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
-        {label: "Projects", path: user_projects_path(@project.user)}, 
-        {label: @project.name, path: user_project_path(@project.user, @project)}
+        {label: "Projects", path: projects_path}, 
+        {label: @project.name, path: project_path(@project)}
     ], 
     attributes: [
         {
@@ -21,7 +21,7 @@
         }, 
         {
             label: "Sites", 
-            path: user_project_sites_path(@user, @project), 
+            path: project_sites_path(@project), 
             variant: :link,
             count: @project.sites.count
         }
@@ -29,11 +29,12 @@
     actions: [
         {
             label: "Edit",
-            path: edit_user_project_path(@user, @project)
+            path: edit_project_path(@project),
+            variant: :secondary
         }, 
         {
             label: "Delete",
-            path: user_project_path(@user, @project),
+            path: project_path(@project),
             variant: :danger,
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
         }

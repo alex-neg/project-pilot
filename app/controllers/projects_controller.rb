@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to user_projects_path(@user), notice: "Project deleted!"
+    redirect_to projects_path, notice: "Project deleted!"
   end
 
   def set_user

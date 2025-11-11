@@ -1,6 +1,6 @@
 <%= render Templates::FormTemplateComponent.new(
     breadcrumb: [
-        {label: "Projects", path: user_projects_path(@user)},
+        {label: "Projects", path: projects_path},
         {label: "Edit"}
     ], 
     header: {
@@ -8,7 +8,7 @@
     }, 
     form: {
         record: @project,
-        url: user_project_path(@user, @project),
+        url: project_path(@project),
         method: :patch,
         submit_label: "Update",
         inputs: [

@@ -1,10 +1,8 @@
 <%=render Templates::ListTemplateComponent.new(
     breadcrumb: [
-        {label: "Users", path: users_path}, 
-        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
-        {label: "Projects", path: user_projects_path(@user)}, 
-        {label: "#{@project.name}", path: user_project_path(@user, @project)},
-        {label: "Sites", path: user_project_sites_path(@user, @project)}
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)}
     ], 
 
     header: {
@@ -12,7 +10,7 @@
         actions: [
             {
                 label: "New Site",
-                path: new_user_project_site_path(@user, @project),
+                path: new_project_site_path(@project),
                 variant: :primary
             }
         ]
@@ -26,11 +24,11 @@
             {label: "Status", accessor: :status}
         ],
         actions: [
-            {label: "View", path_proc: ->(site) {user_project_site_path(site.project.user_id, site.project_id, site)}},
-            {label: "Edit", path_proc: ->(site) {edit_user_project_site_path(site.project.user_id, site.project_id, site)}},
+            {label: "View", path_proc: ->(site) {project_site_path(site.project_id, site.project_id, site)}},
+            {label: "Edit", path_proc: ->(site) {edit_project_site_path(site.project_id, site.project_id, site)}},
             {
                 label: "Delete",
-                path_proc: ->(site) {user_project_site_path(site.project.user_id, site.project_id, site)},
+                path_proc: ->(site) {project_site_path(site.project_id, site.project_id, site)},
                 variant: :link_danger,
                 data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
             }

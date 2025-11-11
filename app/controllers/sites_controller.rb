@@ -1,5 +1,4 @@
 class SitesController < ApplicationController
-  before_action :set_user
   before_action :set_project
 
   def index
@@ -17,7 +16,7 @@ class SitesController < ApplicationController
   def create
     @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to user_project_site_path(@user, @project, @site), notice: "Site created!"
+      redirect_to edit_project_site_path(@project, @site), notice: "Site created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -30,7 +29,7 @@ class SitesController < ApplicationController
   def update
     @site = @project.sites.find(params[:id])
     if @site.update(site_params)
-      redirect_to user_project_site_path(@user, @project, @site), notice: "Site updated!"
+      redirect_to project_site_path(@project, @site), notice: "Site updated!"
     else
       render :edit
     end
@@ -39,17 +38,13 @@ class SitesController < ApplicationController
   def destroy
     @site = @project.sites.find(params[:id])
     @site.destroy
-    redirect_to user_project_sites_path(@user, @project), notice: "Site deleted!"
+    redirect_to project_sites_path(@project), notice: "Site deleted!"
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
   def set_project
-    @project = @user.projects.find(params[:project_id])
+    @project = Project.find(params[:project_id])
   end
 
   def site_params
