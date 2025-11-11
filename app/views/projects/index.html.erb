@@ -2,12 +2,12 @@
     breadcrumb: [
         {label: "Users", path: users_path}, 
         {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)}, 
-        {label: "Projects", path: user_projects_path(@user)}
+        {label: "Projects", path: projects_path}
     ], 
     header: {
-        items: @user,
+        items: @project,
         actions: [
-            {label: "Create Project", path: new_user_project_path(@user), variant: :primary}
+            {label: "Create Project", path: new_project_path, variant: :primary}
         ]
     }, 
     table: {
@@ -19,9 +19,9 @@
             {label: "Status", accessor: :status}
         ], 
         actions: [
-            {label: "View", path_proc: ->(project) {user_project_path(project.user_id, project)}}, 
-            {label: "Edit", path_proc: ->(project) {edit_user_project_path(project.user_id, project)}}, 
-            {label: "Delete", path_proc: ->(project) {user_project_path(project.user_id, project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
+            {label: "View", path_proc: ->(project) {project_path(project)}}, 
+            {label: "Edit", path_proc: ->(project) {edit_project_path(project)}}, 
+            {label: "Delete", path_proc: ->(project) {project_path(project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
         ]
     }
 )%>

@@ -2,7 +2,7 @@
     title: "#{@user.first_name} #{@user.last_name}",
     breadcrumb: [
         {label: "Users", path: users_path},
-        {label: @user.first_name, path: user_path(@user)}
+        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)}
     ],
     attributes: [
         {label: "ID", value: @user.id},
@@ -11,7 +11,7 @@
         {label: "Email", value: @user.email},
         {
             label: "Projects",
-            path: user_projects_path(@user),
+            path: projects_path,
             variant: :link,
             count: @user.projects.count
         },

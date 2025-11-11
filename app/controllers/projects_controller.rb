@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @projects = @user.projects
+    @projects = Project.all
   end
 
   def show
@@ -11,13 +11,13 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = @user.projects.new
+    @project = Project.new
   end
 
   def create
-    @project = current_user.projects.new(project_params)
+    @project = Project.new(project_params)
     if @project.save
-      redirect_to user_project_path(@user, @project), notice: "Project created!"
+      redirect_to project_path(@project), notice: "Project created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to user_project_path(@user, @project), notice: "Project updated!"
+      redirect_to project_path(@project), notice: "Project updated!"
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = current_user.projects.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   def current_user
