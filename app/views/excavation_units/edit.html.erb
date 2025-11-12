@@ -1,13 +1,11 @@
 <%=render Templates::FormTemplateComponent.new(
     breadcrumb: [
-        {label: "Users", path: users_path}, 
-        {label: "#{@user.first_name} #{@user.last_name}", path: user_path(@user)},
-        {label: "Projects", path: user_projects_path(@user)}, 
-        {label: "#{@project.name}", path: user_project_path(@user, @project)},
-        {label: "Sites", path: user_project_sites_path(@user, @project)},
-        {label: "#{@site.name}", path: user_project_site_path(@user, @project, @site)},
-        {label: "Excavation Units", path: user_project_site_excavation_units_path(@user, @project, @site)},
-        {label: "#{@excavation_unit.name}", path: user_project_site_excavation_unit_path(@user, @project, @site, @excavation_unit)},
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "Excavation Units", path: project_site_excavation_units_path(@project, @site)},
+        {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
         {label: "Edit"}
     ],
     header: {
@@ -15,7 +13,7 @@
     }, 
     form: {
         record: @excavation_unit,
-        url: user_project_site_excavation_unit_path(@user, @project, @site, @excavation_unit),
+        url: project_site_excavation_unit_path(@project, @site, @excavation_unit),
         method: :patch,
         submit_label: "Update",
         inputs: [
