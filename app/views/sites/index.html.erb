@@ -24,11 +24,11 @@
             {label: "Status", accessor: :status}
         ],
         actions: [
-            {label: "View", path_proc: ->(site) {project_site_path(site.project_id, site.project_id, site)}},
-            {label: "Edit", path_proc: ->(site) {edit_project_site_path(site.project_id, site.project_id, site)}},
+            {label: "View", path_proc: ->(site) {project_site_path(site.project_id, site)}},
+            {label: "Edit", path_proc: ->(site) {edit_project_site_path(site.project_id, site)}},
             {
                 label: "Delete",
-                path_proc: ->(site) {project_site_path(site.project_id, site.project_id, site)},
+                path_proc: ->(site) {project_site_path(site.project_id, site)},
                 variant: :link_danger,
                 data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
             }

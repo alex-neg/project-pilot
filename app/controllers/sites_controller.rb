@@ -23,6 +23,7 @@ class SitesController < ApplicationController
   end
 
   def edit
+    #binding.pry
     @site = @project.sites.find(params[:id])
   end
 
