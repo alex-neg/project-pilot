@@ -26,7 +26,7 @@ class ContextsController < ApplicationController
   end
 
   def edit
-    @context = @excavation_unit
+    @context = @excavation_unit.contexts.find(params[:id])
   end
 
   def update
