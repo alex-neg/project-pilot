@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :users
   resources :projects do
     resources :sites do
-      resources :excavation_units
+      resources :excavation_units do
+        resources :contexts
+      end
     end
   end
 end

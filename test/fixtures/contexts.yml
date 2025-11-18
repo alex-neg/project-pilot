@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  excavation_unit: one
+  recorded_by: one
+  project_horizon: one
+  plan_image: MyString
+  context_type: MyString
+  brightness: MyString
+  hue: MyString
+  colour: MyString
+  compaction: MyString
+  summary_description: MyText
+  context_formation: MyText
+  phase: 1
+  sub_phase: MyString
+
+two:
+  excavation_unit: two
+  recorded_by: two
+  project_horizon: two
+  plan_image: MyString
+  context_type: MyString
+  brightness: MyString
+  hue: MyString
+  colour: MyString
+  compaction: MyString
+  summary_description: MyText
+  context_formation: MyText
+  phase: 1
+  sub_phase: MyString

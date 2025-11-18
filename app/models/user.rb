@@ -3,4 +3,5 @@ class User < ApplicationRecord
 
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
+  has_many :contexts, foreign_key: "recorded_by_id"
 end
