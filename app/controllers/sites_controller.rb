@@ -16,7 +16,7 @@ class SitesController < ApplicationController
   def create
     @site = @project.sites.new(site_params)
     if @site.save
-      redirect_to edit_project_site_path(@project, @site), notice: "Site created!"
+      redirect_to project_site_path(@project, @site), notice: "Site created!"
     else
       render :new, status: :unprocessable_entity
     end
