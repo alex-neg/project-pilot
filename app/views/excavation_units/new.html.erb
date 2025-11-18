@@ -1,0 +1,24 @@
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "Excavation Units", path: project_site_excavation_units_path(@project, @site)},
+        {label: "New"}
+    ],
+    header: {
+        title: "New Excavation Unit"
+    }, 
+    form: {
+        record: @excavation_unit,
+        url: project_site_excavation_units_path(@project, @site),
+        submit_label: "Create",
+        inputs: [
+            {
+                label: "Name", 
+                accessor: :name
+            },
+        ]
+    }
+)%>

@@ -1,47 +1,26 @@
-<%=render Templates::ListTemplateComponent.new(
-  breadcrumb: [
-    {label: "Projects", path: projects_path}
-    ],
-  header: {
-    items: @projects,
-    title: "Projects", 
-    actions: [
-      {
-        label: "Create Project", 
-        path: new_project_path,
-        variant: :primary
-      }
-    ]
-  },
-  table: {
-    items: @projects, 
-    pagy: @pagy,
-    columns: [ 
-    {
-      label: "ID", 
-      accessor: :id, 
+<%= render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path},
+        {label: "Projects", path: projects_path}
+    ], 
+    header: {
+        items: @project,
+        actions: [
+            {label: "Create Project", path: new_project_path, variant: :primary}
+        ]
     }, 
-    {
-      label: "Name", 
-      accessor: :name,
+    table: {
+        items: @projects, 
+        pagy: @pagy, 
+        columns: [
+            {label: "ID", accessor: :id}, 
+            {label: "Name", accessor: :name}, 
+            {label: "Status", accessor: :status}
+        ], 
+        actions: [
+            {label: "View", path_proc: ->(project) {project_path(project)}}, 
+            {label: "Edit", path_proc: ->(project) {edit_project_path(project)}}, 
+            {label: "Delete", path_proc: ->(project) {project_path(project)}, variant: :link_danger, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}}
+        ]
     }
-    ],
-    actions: [
-    {
-      label: "View",
-      path_proc: ->(project) {project_path(project)},
-    
-    },
-    {
-      label: "Edit",
-      path_proc: ->(project) {edit_project_path(project)},
-    }, 
-    {
-      label: "Delete",
-      path_proc: ->(project) {project_path(project)},
-      variant: :link_danger,
-      data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
-    }
-    ]
-  }
 )%>

@@ -26,8 +26,9 @@
           <% @attributes.each do |item| %>
             <tr class="">
               <td class="h-8">
+                <!-- this if block needs to be revised and updated.  -->
                 <% if item[:value] == title %>
-                  <%= "" %>
+                  <%= item[:value] %>
                 <% elsif item[:variant].present? %>
                   <p class="text-lg text-gray-700"><%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %></p>
                 <% elsif item[:label].to_s.downcase.start_with?("image") %>

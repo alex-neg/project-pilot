@@ -1,0 +1,37 @@
+<%=render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "Excavation Units"}
+    ],
+    header: {
+        items: @user,
+        actions: [
+            {
+                label: "New Excavation Unit",
+                path: new_project_site_excavation_unit_path(@project, @site),
+                variant: :primary
+            }
+        ]
+    },
+    table: {
+        items: @excavation_units, 
+        pagy: @pagy, 
+        columns: [
+            {label: "ID", accessor: :id},
+            {label: "Name", accessor: :name},
+        ],
+        actions: [
+            {label: "View", path_proc: ->(excavation_unit) {project_site_excavation_unit_path(excavation_unit.site.project_id, excavation_unit.site_id, excavation_unit)}},
+            {label: "Edit", path_proc: ->(excavation_unit) {edit_project_site_excavation_unit_path(excavation_unit.site.project_id, excavation_unit.site_id, excavation_unit)}},
+            {
+                label: "Delete",
+                path_proc: ->(excavation_unit) {project_site_excavation_unit_path(excavation_unit.site.project_id, excavation_unit.site_id, excavation_unit.id)},
+                variant: :link_danger,
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            }
+        ]
+    }
+)%>

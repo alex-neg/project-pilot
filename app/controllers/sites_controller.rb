@@ -1,46 +1,42 @@
 class SitesController < ApplicationController
+  before_action :set_project
+
   def index
-    @project = Project.find(params[:project_id])
-    @pagy, @sites = pagy(@project.sites, limit: 5)
+    @sites = @project.sites
   end
 
   def show
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
   end
 
   def new
-    @project = Project.find(params[:project_id])
     @site = @project.sites.new
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @site = @project.sites.new(site_params)
     if @site.save
       redirect_to project_site_path(@project, @site), notice: "Site created!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    @project = Project.find(params[:project_id])
+    #binding.pry
     @site = @project.sites.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
     if @site.update(site_params)
-      redirect_to project_site_path(@project), notice: "Site updated!"
+      redirect_to project_site_path(@project, @site), notice: "Site updated!"
     else
       render :edit
     end
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
     @site = @project.sites.find(params[:id])
     @site.destroy
     redirect_to project_sites_path(@project), notice: "Site deleted!"
@@ -48,7 +44,11 @@ class SitesController < ApplicationController
 
   private
 
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
   def site_params
-    params.require(:site).permit(:name)
+    params.require(:site).permit(:name, :status)
   end
 end

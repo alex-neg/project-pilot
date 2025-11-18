@@ -34,28 +34,30 @@
             
           </thead>
           <tbody>
-              <% @table[:items].each do |item| %>
-                <tr>
-                  <% @table[:columns].each do |col| %>
-                    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
-                      <% value = item.send(col[:accessor]) %>
-                      <% if col[:accessor] == :photo || col[:accessor] == :before_photo || col[:accessor] === :after_photo %>
-                        <%= value.attached? ? image_tag(value, class: "h-12 w-auto rounded") : content_tag(:em, "No image") %>
-                      <% else %>
-                        <%= value %>
-                      <% end %>
-                    </td>
-                  <% end %>
+              <% if @table[:items].present? %>
+                <% @table[:items].each do |item| %>
+                  <tr>
+                    <% @table[:columns].each do |col| %>
+                      <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                        <% value = item.send(col[:accessor]) %>
+                        <% if col[:accessor] == :photo || col[:accessor] == :before_photo || col[:accessor] === :after_photo %>
+                          <%= value.attached? ? image_tag(value, class: "h-12 w-auto rounded") : content_tag(:em, "No image") %>
+                        <% else %>
+                          <%= value %>
+                        <% end %>
+                      </td>
+                    <% end %>
 
-                  <% if @table[:actions].present? %>
-                    <td class="px-6 py-4 space-x-2 text-sm text-gray-700 whitespace-nowrap">
-                      <% @table[:actions].each do |action| %>
-                        <% path = action[:path_proc].call(item) %>
-                        <%= link_to action[:label], path, data: action[:data] %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                </tr>
+                    <% if @table[:actions].present? %>
+                      <td class="px-6 py-4 space-x-2 text-sm text-gray-700 whitespace-nowrap">
+                        <% @table[:actions].each do |action| %>
+                          <% path = action[:path_proc].call(item) %>
+                          <%= link_to action[:label], path, data: action[:data] %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
               <% end %>
           </tbody>
         </table>

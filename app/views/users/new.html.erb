@@ -1,0 +1,19 @@
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        {label: "Users", path: users_path},
+        {label: "New"}
+    ], 
+    header: {
+        title: "Create New User"
+    },
+    form: {
+        record: User.new,
+        url: users_path,
+        submit_label: "Create",
+        inputs: [
+            {label: "First Name", accessor: :first_name},
+            {label: "Last Name", accessor: :last_name},
+            {label: "Email", accessor: :email}
+        ]
+    }
+)%>

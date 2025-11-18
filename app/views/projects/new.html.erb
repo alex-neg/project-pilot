@@ -1,19 +1,25 @@
 <%= render Templates::FormTemplateComponent.new(
-  breadcrumb: [
-      {label: "Projects", path: projects_path},
-      {label: "New"}
-    ],
-  header: {
-    title: "Create New Project",
-  },
-  form: {
-    record: Project.new,
-    submit_label: "Create",
-    inputs: [
-      {
-        label: "Name",
-        accessor: :name
-      }
-    ],
-  }
-) %>
+    breadcrumb: [
+        {label: "Projects", path: projects_path},
+        {label: "New"}
+    ], 
+    header: {
+        title: "Crate New Project"
+    }, 
+    form: {
+        record: @project,
+        url: projects_path,
+        submit_label: "Create",
+        inputs: [
+            {
+                label: "Name", 
+                accessor: :name
+            }, 
+            {
+                label: "Status", 
+                accessor: :status,
+                collection: Project.statuses.keys.map { |status| [status.titleize, status] }
+            }
+        ]
+    }
+)%>

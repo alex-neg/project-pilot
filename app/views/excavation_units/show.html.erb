@@ -1,0 +1,40 @@
+<%=render Templates::DetailTemplateComponent.new(
+    title: @excavation_unit.name, 
+    breadcrumb: [
+        {label: "Projects", path: projects_path},
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "Excavation Units", path: project_site_excavation_units_path(@project, @site)},
+        {label: "#{@excavation_unit.name}"}
+    ],
+    attributes: [
+        {
+            label: "ID",
+            value: @excavation_unit.id
+        }, 
+        {
+            label: "Name",
+            value: @excavation_unit.name
+        },
+        {
+            label: "Contexts",
+            path: project_site_excavation_unit_path(@project, @site),
+            variant: :link,
+            count: 0
+        }
+    ],
+    actions: [
+        {
+            label: "Edit",
+            path: edit_project_site_excavation_unit_path(@project, @site, @excavation_unit),
+            variant: :secondary,
+        }, 
+        {
+            label: "Delete",
+            path: project_site_excavation_unit_path(@project, @site, @excavation_unit),
+            variant: :danger,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        }
+    ]
+)%>

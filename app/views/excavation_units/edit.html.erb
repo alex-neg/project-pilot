@@ -1,0 +1,26 @@
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "Excavation Units", path: project_site_excavation_units_path(@project, @site)},
+        {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
+        {label: "Edit"}
+    ],
+    header: {
+        title: "Update Excavation Unit"
+    }, 
+    form: {
+        record: @excavation_unit,
+        url: project_site_excavation_unit_path(@project, @site, @excavation_unit),
+        method: :patch,
+        submit_label: "Update",
+        inputs: [
+            {
+                label: "Name", 
+                accessor: :name
+            },
+        ]
+    }
+)%>
