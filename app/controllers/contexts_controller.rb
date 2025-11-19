@@ -16,10 +16,11 @@ class ContextsController < ApplicationController
   end
 
   def create
+    #binding.pry
     @context = @excavation_unit.contexts.new(context_params)
-    @context.recorded_by = User.first.id
+    @context.recorded_by = User.first
     if @context.save
-      redirect_to project_site_excavation_unit_context.path(@project, @site, @excavation_unit, @context), notice: "Context created!"
+      redirect_to project_site_excavation_unit_context_path(@project, @site, @excavation_unit, @context), notice: "Context created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -59,6 +60,6 @@ class ContextsController < ApplicationController
   end
 
   def context_params
-    params.require(:context).permit()
+    params.require(:context).permit(:plan_image, :context_type, :brightness, :hue, :colour, :compaction, :summary_description, :context_formation, :phase, :sub_phase)
   end
 end

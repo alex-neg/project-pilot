@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_18_194721) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_19_183223) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_194721) do
   create_table "contexts", force: :cascade do |t|
     t.integer "excavation_unit_id", null: false
     t.integer "recorded_by_id", null: false
-    t.integer "project_horizon_id", null: false
+    t.integer "project_horizon_id"
     t.string "context_type"
     t.string "brightness"
     t.string "hue"
@@ -65,6 +65,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_194721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["site_id"], name: "index_excavation_units_on_site_id"
+  end
+
+  create_table "project_horizons", force: :cascade do |t|
+    t.string "start_period"
+    t.string "end_period"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_horizons_on_project_id"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -106,6 +115,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_194721) do
   add_foreign_key "contexts", "project_horizons"
   add_foreign_key "contexts", "users", column: "recorded_by_id"
   add_foreign_key "excavation_units", "sites"
+  add_foreign_key "project_horizons", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "sites", "projects"
