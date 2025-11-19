@@ -9,8 +9,8 @@ class Context < ApplicationRecord
   has_one_attached :plan_image
 
   enum :context_type, { low: 0, medium: 1, high: 2 }
-  enum :brightness, { low: 0, medium: 1, high: 2 }
-  enum :hue, { low: 0, medium: 1, high: 2 }
+  enum :brightness, { low: 0, medium: 1, high: 2 }, prefix: true
+  enum :hue, { low: 0, medium: 1, high: 2 }, prefix: true
   enum :colour, { red: 0, green: 1, blue: 2 }
-  enum :compaction, { loose: 0, medium: 1, dense: 2 }
+  enum :compaction, { loose: 0, medium: 1, dense: 2 }, prefix: true
 end

@@ -1,2 +1,42 @@
-<h1>Contexts#index</h1>
-<p>Find me in app/views/contexts/index.html.erb</p>
+<%=render Templates::ListTemplateComponent.new(
+    breadcrumb: [
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
+        {label: "Context"}
+    ],
+    header: {
+        #items: @user,
+        actions: [
+            {
+                label: "New Context",
+                path: new_project_site_excavation_unit_context_path(@project, @site, @excavation_unit),
+                variant: :primary
+            }
+        ]
+    },
+    table: {
+        items: @contexts,
+        pagy: @pagy, 
+        columns: [
+            {label: "ID", accessor: :id},
+            {label: "Context Type", accessor: :context_type},
+            {label: "Recorded by", accessor: :recorded_by},
+            {label: "Horizon", accessor: :horizon},
+            {label: "Phase", accessor: :phase},
+            {label: "Sub phase", accessor: :sub_phase},
+        ],
+        actions: [
+            {label: "View", path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)}},
+            {label: "Edit", path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)}},
+            {
+                label: "Delete",
+                path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)},
+                variant: :link_danger,
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            }
+        ]
+    }
+)%>
