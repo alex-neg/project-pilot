@@ -42,7 +42,7 @@ class ContextsController < ApplicationController
   def destroy
     @context = @excavation_unit.contexts.find(params[:id])
     @context.destroy
-    redirect_to project_site_excavation_unit_contexts_path(@project, @site, @excavation_unit)
+    redirect_to project_site_excavation_unit_contexts_path(@project, @site, @excavation_unit), notice: "Context deleted!"
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_19_183223) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_20_133211) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,11 +43,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_19_183223) do
     t.integer "excavation_unit_id", null: false
     t.integer "recorded_by_id", null: false
     t.integer "project_horizon_id"
-    t.string "context_type"
-    t.string "brightness"
-    t.string "hue"
-    t.string "colour"
-    t.string "compaction"
+    t.integer "context_type", default: 0, null: false
+    t.integer "brightness"
+    t.integer "hue"
+    t.integer "colour"
+    t.integer "compaction"
     t.text "summary_description"
     t.text "context_formation"
     t.integer "phase"
