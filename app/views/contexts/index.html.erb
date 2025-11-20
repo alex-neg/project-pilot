@@ -5,7 +5,7 @@
         {label: "Sites", path: project_sites_path(@project)},
         {label: "#{@site.name}", path: project_site_path(@project, @site)},
         {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
-        {label: "Context"}
+        {label: "Contexts"}
     ],
     header: {
         #items: @user,
@@ -30,7 +30,7 @@
         ],
         actions: [
             {label: "View", path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)}},
-            {label: "Edit", path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)}},
+            {label: "Edit", path_proc: ->(context) {edit_project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)}},
             {
                 label: "Delete",
                 path_proc: ->(context) {project_site_excavation_unit_context_path(context.excavation_unit.site.project_id, context.excavation_unit.site_id, context.excavation_unit_id, context.id)},

@@ -1,2 +1,72 @@
-<h1>Contexts#edit</h1>
-<p>Find me in app/views/contexts/edit.html.erb</p>
+<%=render Templates::FormTemplateComponent.new(
+    breadcrumb: [
+        # {label: "Projects", path: projects_path}, 
+        # {label: "#{@project.name}", path: project_path(@project)},
+        # {label: "Sites", path: project_sites_path(@project)},
+        # {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        # {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
+        {label: "Contexts", path: project_site_excavation_unit_contexts_path(@project, @site, @excavation_unit)},
+        {label: "Context #{@context.id}", path: project_site_excavation_unit_context_path(@project, @site, @excavation_unit, @context)},
+        {label: "Edit"}
+    ],
+    header: {
+        title: "Edit Context"
+    },
+    form: {
+        record: @context,
+        url: project_site_excavation_unit_context_path(@project, @site, @excavation_unit, @context),
+        method: :patch,
+        submit_label: "Update",
+        inputs: [
+            {
+                label: "Plan Image",
+                accessor: :plan_image
+            },
+            {
+                label: "Context Type", 
+                accessor: :context_type,
+                collection: ::Context.context_types.keys.map { |context_type| [context_type.titleize, context_type] }
+            },
+            {
+                label: "Brightness",
+                accessor: :brightness,
+                collection: ::Context.brightnesses.keys.map { |brightness| [brightness.titleize, brightness] }
+            },
+            {
+                label: "Hue",
+                accessor: :hue,
+                collection: ::Context.hues.keys.map { |hue| [hue.titleize, hue] }
+            },
+            {
+                label: "Colour",
+                accessor: :colour,
+                collection: ::Context.colours.keys.map { |colour| [colour.titleize, colour] }
+            },
+            {
+                label: "Compaction",
+                accessor: :compaction,
+                collection: ::Context.compactions.keys.map { |compaction| [compaction.titleize, compaction] }
+            },
+            {
+                label: "Summary description",
+                accessor: :summary_description
+            },
+            {
+                label: "Context formation",
+                accessor: :context_formation
+            },
+            # {
+            #     label: "Project horizon",
+            #     accessor: :project_horizon
+            # },
+            {
+                label: "Phase",
+                accessor: :phase
+            },
+            {
+                label: "Sub phase",
+                accessor: :sub_phase
+            }
+        ]
+    }
+)%>
