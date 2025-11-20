@@ -31,7 +31,7 @@
                   <%= item[:value] %>
                 <% elsif item[:variant].present? %>
                   <p class="text-lg text-gray-700"><%= link_to  "#{item[:label]}: #{item[:count]}", item[:path] %></p>
-                <% elsif item[:label].to_s.downcase.start_with?("image") %>
+                <% elsif item[:label].to_s.downcase.include?("image") %>
                    <% if item[:value].present? %>
                       <p class="text-lg text-gray-700"><%= item[:label] %>:</p>
                       <%= image_tag item[:value], alt: item[:label], class: "w-96 h-auto rounded shadow" %>

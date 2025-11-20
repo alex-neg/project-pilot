@@ -1,2 +1,81 @@
-<h1>Contexts#show</h1>
-<p>Find me in app/views/contexts/show.html.erb</p>
+<%=render Templates::DetailTemplateComponent.new(
+    title: "Context",
+    breadcrumb: [
+        {label: "Projects", path: projects_path}, 
+        {label: "#{@project.name}", path: project_path(@project)},
+        {label: "Sites", path: project_sites_path(@project)},
+        {label: "#{@site.name}", path: project_site_path(@project, @site)},
+        {label: "#{@excavation_unit.name}", path: project_site_excavation_unit_path(@project, @site, @excavation_unit)},
+        {label: "Contexts", path: project_site_excavation_unit_contexts_path(@project, @site, @excavation_unit)},
+        {label: "Context #{@context.id}"},
+    ],
+    attributes: [
+        {
+            label: "ID",
+            value: @context.id
+        }, 
+        {
+            label: "Context type",
+            value: @context.context_type
+        },
+        {
+            label: "Brightness",
+            value: @context.brightness
+        },
+        {
+            label: "Hue",
+            value: @context.hue
+        },
+        {
+            label: "Colour",
+            value: @context.colour
+        },
+        {
+            label: "Compaction",
+            value: @context.compaction
+        },
+        {
+            label: "Summary description",
+            value: @context.summary_description
+        },
+        {
+            label: "Context formation",
+            value: @context.context_formation
+        },
+        {
+            label: "Horizon",
+            value: @context.project_horizon
+        },
+        {
+            label: "Phase",
+            value: @context.phase
+        },
+        {
+            label: "Sub phase",
+            value: @context.sub_phase
+        },
+        {
+            label: "Plan image",
+            value: @context.plan_image
+        },
+        # {
+        #     label: "Contexts",
+        #     path: project_site_excavation_unit_contexts_path(@project, @site, @excavation_unit),
+        #     variant: :link,
+        #     count: 0
+        # }
+    ],
+    actions: [
+        {
+            label: "Edit",
+            path: edit_project_site_excavation_unit_context_path(@project, @site, @excavation_unit, @context),
+            variant: :secondary,
+        }, 
+        {
+            label: "Delete",
+            path: project_site_excavation_unit_context_path(@project, @site, @excavation_unit, @context),
+            variant: :danger,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        }
+    ]
+)%>
