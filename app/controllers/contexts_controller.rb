@@ -16,7 +16,6 @@ class ContextsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @context = @excavation_unit.contexts.new(context_params)
     @context.recorded_by = User.first
     if @context.save
